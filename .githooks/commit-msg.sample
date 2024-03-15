@@ -10,7 +10,7 @@ if [[ $(head -1 "$COMMIT_MESSAGE_FILE_PATH") == '' ]]; then
   exit 0  
 fi  
   
-# 브랜치 이름에서 마지막 '/' 이후의 문자열만 남긴다. '/'가 없다면 브랜치 전체 이름이 POSTFIX 된다.  
+# 브랜치 이름에서 마지막 '_' 이후의 문자열만 남긴다. '_'가 없다면 브랜치 전체 이름이 POSTFIX 된다.  
 # POSTFIX의 첫 번째 '-' 앞뒤의 문자열만 포함한다. '-'가 없다면 변경은 없다  
 # e.g.)  
 # | branch name      | postfix    |  
