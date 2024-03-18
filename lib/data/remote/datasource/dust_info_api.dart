@@ -9,7 +9,7 @@ import '../entity/response/province_response.dart';
 class DustInfoApi {
   final dio = Dio();
   final url =
-      "${dotenv.get(EnvKeys.BASE_URL)}ArpltnStatsSvc/getCtprvnMesureLIst";
+      "${dotenv.get(EnvKeys.BASE_URL)}B552584/ArpltnStatsSvc/getCtprvnMesureLIst";
 
   Future<List<ProvinceResponse>> getRealTimeAvgListByProvince(
       ProvinceRequest provinceRequest) async {
