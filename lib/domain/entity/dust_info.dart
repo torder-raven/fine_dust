@@ -1,21 +1,6 @@
-import 'dart:core';
-
 class DustInfo {
+  final int rawValue;
+  final String status;
 
-  // level
-  final DustLevel dustLevel;
-
-  DustInfo({
-    required this.dustLevel,
-  });
-}
-
-class DustLevel {
-  final int level;
-  final String levelName;
-
-  DustLevel({
-    required int this.level,
-    required String this.levelName,
-  });
+  DustInfo({required this.rawValue, required this.status});
 }

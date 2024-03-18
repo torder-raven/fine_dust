@@ -1,9 +1,16 @@
 import 'dust_info.dart';
+import 'location_code.dart';
 
 class LocationInfo {
-  final int id;
+  final LocationCode locationCode;
+  final List<DustInfo> fineDustList;
+  final List<DustInfo> ultraFineDustList;
+  final List<DustInfo> ozoneList;
 
   LocationInfo({
-    required this.id,
+    required this.locationCode,
+    required this.fineDustList,
+    required this.ultraFineDustList,
+    required this.ozoneList,
   });
 }
