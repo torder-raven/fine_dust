@@ -7,6 +7,6 @@ class DeleteBookmarkUsecase {
 
   final BookmarkRepository _repository;
 
-  Future<bool> call({required int locationId}) =>
-      _repository.deleteBookmark(locationId: locationId);
+  Future<bool> call({required int locationCode}) =>
+      _repository.deleteBookmark(locationCode: locationCode);
 }

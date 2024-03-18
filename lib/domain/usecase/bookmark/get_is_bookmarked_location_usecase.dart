@@ -6,6 +6,6 @@ class GetIsBookmarkedLocationUsecase {
 
   final BookmarkRepository _repository;
 
-  Future<bool> call({required int locationId}) =>
-      _repository.getIsBookmarkedLocation(locationId: locationId);
+  Future<bool> call({required int locationCode}) =>
+      _repository.getIsBookmarkedLocation(locationCode: locationCode);
 }
