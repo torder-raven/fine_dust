@@ -20,7 +20,7 @@ class FineDustRepositoryImpl implements FineDustRepository {
   }
 
   @override
-  Future<LocationTotalInfo> getLocalAirInfo({required int locationId}) async {
+  Future<LocationTotalInfo> getLocalAirInfo({required int locationCode}) async {
     // TODO: implement getLocalAirInfo
     throw UnimplementedError();
   }
