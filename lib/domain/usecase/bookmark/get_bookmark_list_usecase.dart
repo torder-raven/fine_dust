@@ -1,4 +1,3 @@
-import 'package:fine_dust/domain/entity/location_Info.dart';
 import 'package:fine_dust/domain/repository/bookmark_repositort.dart';
 
 class GetBookmarkListUsecase {
@@ -7,5 +6,5 @@ class GetBookmarkListUsecase {
 
   final BookmarkRepository _repository;
 
-  Stream<List<LocationInfo>> call() => _repository.getBookmarkList();
+  Stream<List<int>> call() => _repository.getBookmarkList();
 }
