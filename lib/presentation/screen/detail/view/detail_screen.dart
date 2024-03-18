@@ -1,6 +1,8 @@
+import 'package:fine_dust/domain/entity/item_code.dart';
 import 'package:fine_dust/domain/entity/location_code.dart';
 import 'package:fine_dust/domain/entity/location_total_info.dart';
 import 'package:fine_dust/domain/usecase/dustInfo/get_local_air_info_usecase.dart';
+import 'package:fine_dust/presentation/screen/detail/view/detail_card_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -58,11 +60,8 @@ class DetailScreen extends StatelessWidget {
                 child: CustomScrollView(
                   slivers: [
                     SliverAppBar(
-                      // stretch: true,
                       pinned: true,
                       expandedHeight: 200.0,
-                      // elevation: 2,
-                      // collapsedHeight: 50.0,
                       shadowColor: Colors.black,
                       backgroundColor: Colors.blue[800],
                       leading: BackButton(
@@ -71,13 +70,25 @@ class DetailScreen extends StatelessWidget {
                       flexibleSpace: FlexibleSpaceBar(
                         // background: , // TODO 이미지 넣으면 딱인데..
                         expandedTitleScale: 2,
-                        title: Text(locationTotalInfo.locationCode.locationName),
+                        title: Text(
+                          locationTotalInfo.locationCode.locationName,
+                        ),
                         titlePadding: EdgeInsets.all(16.0),
                       ),
                     ),
                     SliverList(
                       delegate: SliverChildListDelegate(
-                        [],
+                        [
+                          DetailCardView(
+                            title: "미세먼지(PM10)",
+                          ),
+                          DetailCardView(
+                            title: "초미세먼지(PM2.5)",
+                          ),
+                          DetailCardView(
+                            title: "오존(O₃)",
+                          ),
+                        ],
                       ),
                     ),
                   ],
