@@ -1,4 +1,4 @@
-class ProvinceResponse {
+class RealTimeAvgListDistinctByProvinceResponse {
   final double daegu;
   final double chungnam;
   final double incheon;
@@ -19,7 +19,7 @@ class ProvinceResponse {
   final DateTime dataTime;
   final String itemcode;
 
-  ProvinceResponse.fromJson({required Map<String, dynamic> json})
+  RealTimeAvgListDistinctByProvinceResponse.fromJson({required Map<String, dynamic> json})
       : daegu = double.parse(json['daegu'] ?? '0'),
         chungnam = double.parse(json['chungnam'] ?? '0'),
         incheon = double.parse(json['incheon'] ?? '0'),
