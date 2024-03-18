@@ -8,6 +8,6 @@ class GetLocalAirInfoUsecase {
 
   final FineDustRepository _repository;
 
-  Future<LocationTotalInfo> call({required int locationId}) =>
-      _repository.getLocalAirInfo(locationId: locationId);
+  Future<LocationTotalInfo> call({required int locationCode}) =>
+      _repository.getLocalAirInfo(locationCode: locationCode);
 }

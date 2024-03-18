@@ -1,7 +1,8 @@
 import 'package:fine_dust/data/remote/datasource/dust_info_api.dart';
 import 'package:fine_dust/domain/entity/dust_info.dart';
-
-import 'package:fine_dust/domain/entity/location_Info.dart';
+import 'package:fine_dust/domain/entity/location_code.dart';
+import 'package:fine_dust/domain/entity/location_fine_dust.dart';
+import 'package:fine_dust/domain/entity/location_total_info.dart';
 
 import '../../../domain/repository/fine_dust_repository.dart';
 
@@ -13,26 +14,14 @@ class FineDustRepositoryImpl implements FineDustRepository {
   }) : _api = api;
 
   @override
-  Future<List<DustInfo>> getFineDustInfoList() async {
-    // TODO: implement getOzoneInfoList
+  Future<List<LocationFineDust>> getLocationFineDustList() async {
+    // TODO: implement getLocationFineDustList
     throw UnimplementedError();
   }
 
   @override
-  Future<List<DustInfo>> getOzoneInfoList() async {
-    // TODO: implement getOzoneInfoList
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<List<DustInfo>> getUltraFineDustInfoList() async {
-    // TODO: implement getUltraFineDustInfoList
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<LocationInfo> getLocalAirInfoUsecase({required int locationId}) async {
-    // TODO: implement getLocalAirInfoUsecase
+  Future<LocationTotalInfo> getLocalAirInfo({required int locationCode}) async {
+    // TODO: implement getLocalAirInfo
     throw UnimplementedError();
   }
 }
