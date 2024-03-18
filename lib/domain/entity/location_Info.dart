@@ -1,9 +1,12 @@
 import 'dust_info.dart';
+import 'location_code.dart';
 
 class LocationInfo {
-  final int id;
+  final LocationCode locationCode;
+  final DustInfo dustInfo;
 
   LocationInfo({
-    required this.id,
+    required this.locationCode,
+    required this.dustInfo,
   });
 }

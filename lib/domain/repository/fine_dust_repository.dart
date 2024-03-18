@@ -1,5 +1,5 @@
-import 'package:fine_dust/domain/entity/dust_info.dart';
 import 'package:fine_dust/domain/entity/location_Info.dart';
+import 'package:fine_dust/domain/entity/location_total_info.dart';
 
 abstract interface class FineDustRepository {
   Future<List<DustInfo>> getFineDustInfoList();
