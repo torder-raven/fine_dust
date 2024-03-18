@@ -1,5 +1,5 @@
 class DustInfo {
-  final int rawValue;
+  final num rawValue;
   final DateTime dateTime;
   final String status;
 
