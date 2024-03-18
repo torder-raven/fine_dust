@@ -6,6 +6,6 @@ class BookmarkLocationUsecase {
 
   final BookmarkRepository _repository;
 
-  Future<bool> call({required int locationCode}) =>
-      _repository.bookmarkLocation(locationCode: locationCode);
+  Future<bool> call({required int locationId}) =>
+      _repository.bookmarkLocation(locationId: locationId);
 }
