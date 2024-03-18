@@ -1,4 +1,5 @@
-import '../../entity/dust_info.dart';
+import 'package:fine_dust/domain/entity/location_Info.dart';
+
 import '../../repository/fine_dust_repository.dart';
 
 class GetFineDustInfoListUsecase {
@@ -6,5 +7,5 @@ class GetFineDustInfoListUsecase {
 
   final FineDustRepository _repository;
 
-  Future<List<DustInfo>> call() => _repository.getFineDustInfoList();
+  Future<List<LocationInfo>> call() => _repository.getFineDustInfoList();
 }

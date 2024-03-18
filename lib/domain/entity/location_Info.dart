@@ -3,14 +3,10 @@ import 'location_code.dart';
 
 class LocationInfo {
   final LocationCode locationCode;
-  final List<DustInfo> fineDustList;
-  final List<DustInfo> ultraFineDustList;
-  final List<DustInfo> ozoneList;
+  final DustInfo dustInfo;
 
   LocationInfo({
     required this.locationCode,
-    required this.fineDustList,
-    required this.ultraFineDustList,
-    required this.ozoneList,
+    required this.dustInfo,
   });
 }

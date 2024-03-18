@@ -1,4 +1,5 @@
-import 'package:fine_dust/domain/entity/dust_info.dart';
+import 'package:fine_dust/domain/entity/location_Info.dart';
+
 import '../../repository/fine_dust_repository.dart';
 
 class GetUltraFineDustInfoListUsecse {
@@ -7,5 +8,5 @@ class GetUltraFineDustInfoListUsecse {
 
   final FineDustRepository _repository;
 
-  Future<List<DustInfo>> call() => _repository.getUltraFineDustInfoList();
+  Future<List<LocationInfo>> call() => _repository.getUltraFineDustInfoList();
 }
