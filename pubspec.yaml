@@ -41,7 +41,7 @@ dependencies:
   freezed: ^2.4.7
   freezed_annotation: ^2.4.1
   json_annotation: ^4.8.1
-  cloud_firestore: ^4.15.9
+  cloud_firestore: ^4.15.9ㄴ
   firebase_core: ^2.27.1
   firebase_app_installations: ^0.2.4+18
 

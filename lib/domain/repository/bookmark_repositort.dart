@@ -1,9 +1,9 @@
 
-import 'package:fine_dust/domain/entity/location_code.dart';
+import '../entity/location_Info.dart';
 
 abstract interface class BookmarkRepository {
-  Future<bool> getIsBookmarkedLocation({required LocationCode locationCode});
+  Future<bool> getIsBookmarkedLocation({required int locationId});
   Stream<List<int>> getBookmarkList();
-  deleteBookmark({required LocationCode locationCode});
-  bookmarkLocation({required LocationCode locationCode});
+  Future<bool> deleteBookmark({required int locationId});
+  Future<bool> bookmarkLocation({required int locationId});
 }
