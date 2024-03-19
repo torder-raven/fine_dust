@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 class DetailCardView extends StatelessWidget {
   final String title;
+  final Widget child;
 
   const DetailCardView({
     required this.title,
+    required this.child,
     super.key,
   });
 
@@ -31,6 +33,7 @@ class DetailCardView extends StatelessWidget {
                 ),
               ],
             ),
+            child
           ],
         ),
       ),

@@ -2,6 +2,9 @@ import 'package:fine_dust/domain/entity/item_code.dart';
 import 'package:fine_dust/domain/entity/location_code.dart';
 import 'package:fine_dust/domain/entity/location_total_info.dart';
 import 'package:fine_dust/domain/usecase/dustInfo/get_local_air_info_usecase.dart';
+import 'package:fine_dust/presentation/screen/detail/view/air_quality_view.dart';
+import 'package:fine_dust/presentation/screen/detail/view/air_quality_view.dart';
+import 'package:fine_dust/presentation/screen/detail/view/air_quality_view.dart';
 import 'package:fine_dust/presentation/screen/detail/view/detail_card_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,21 +21,21 @@ class DetailScreen extends StatelessWidget {
       locationCode: LocationCode.seoul,
       fineDustList: [
         DustInfo(
-          rawValue: 1,
+          rawValue: 0,
           dateTime: DateTime.now(),
           status: "좋음",
         ),
       ],
       ultraFineDustList: [
         DustInfo(
-          rawValue: 1,
+          rawValue: 365,
           dateTime: DateTime.now(),
           status: "좋음",
         ),
       ],
       ozoneList: [
         DustInfo(
-          rawValue: 1,
+          rawValue: 20,
           dateTime: DateTime.now(),
           status: "좋음",
         ),
@@ -79,14 +82,17 @@ class DetailScreen extends StatelessWidget {
                     SliverList(
                       delegate: SliverChildListDelegate(
                         [
-                          DetailCardView(
-                            title: "미세먼지(PM10)",
+                          AirQualityView(
+                            type: ItemCode.FINE_DUST,
+                            dustInfo: locationTotalInfo.fineDustList.first,
                           ),
-                          DetailCardView(
-                            title: "초미세먼지(PM2.5)",
+                          AirQualityView(
+                            type: ItemCode.ULTRA_FINE_DUST,
+                            dustInfo: locationTotalInfo.ultraFineDustList.first,
                           ),
-                          DetailCardView(
-                            title: "오존(O₃)",
+                          AirQualityView(
+                            type: ItemCode.OZONE,
+                            dustInfo: locationTotalInfo.ozoneList.first,
                           ),
                         ],
                       ),
