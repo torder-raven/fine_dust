@@ -1,42 +1,26 @@
 class RealTimeAvgListDistinctByProvinceResponse {
-  final double daegu;
-  final double chungnam;
-  final double incheon;
-  final double daejeon;
-  final double gyeongbuk;
-  final double sejong;
-  final double gwangju;
-  final double jeonbuk;
-  final double gangwon;
-  final double ulsan;
-  final double jeonnam;
-  final double seoul;
-  final double busan;
-  final double jeju;
-  final double chungbuk;
-  final double gyeongnam;
-  final double gyeonggi;
+  final String cityName;
+  final String cityNameEng;
+  final double coValue;
+  final double khaiValue;
+  final double no2Value;
+  final double o3Value;
+  final double pm10Value;
+  final double pm25Value;
+  final double so2Value;
   final DateTime dataTime;
-  final String itemcode;
+  final String itemCode;
 
   RealTimeAvgListDistinctByProvinceResponse.fromJson({required Map<String, dynamic> json})
-      : daegu = double.parse(json['daegu'] ?? '0'),
-        chungnam = double.parse(json['chungnam'] ?? '0'),
-        incheon = double.parse(json['incheon'] ?? '0'),
-        daejeon = double.parse(json['daejeon'] ?? '0'),
-        gyeongbuk = double.parse(json['gyeongbuk'] ?? '0'),
-        sejong = double.parse(json['sejong'] ?? '0'),
-        gwangju = double.parse(json['gwangju'] ?? '0'),
-        jeonbuk = double.parse(json['jeonbuk'] ?? '0'),
-        gangwon = double.parse(json['gangwon'] ?? '0'),
-        ulsan = double.parse(json['ulsan'] ?? '0'),
-        jeonnam = double.parse(json['jeonnam'] ?? '0'),
-        seoul = double.parse(json['seoul'] ?? '0'),
-        busan = double.parse(json['busan'] ?? '0'),
-        jeju = double.parse(json['jeju'] ?? '0'),
-        chungbuk = double.parse(json['chungbuk'] ?? '0'),
-        gyeongnam = double.parse(json['gyeongnam'] ?? '0'),
+      : cityName = json['cityName'],
+        cityNameEng = json['cityNameEng'],
+        coValue = double.parse(json['coValue'] ?? '0'),
+        khaiValue = double.parse(json['khaiValue'] ?? '0'),
+        no2Value = double.parse(json['no2Value'] ?? '0'),
+        o3Value = double.parse(json['o3Value'] ?? '0'),
+        pm10Value = double.parse(json['pm10Value'] ?? '0'),
+        pm25Value = double.parse(json['pm25Value'] ?? '0'),
+        so2Value = double.parse(json['so2Value'] ?? '0'),
         dataTime = DateTime.parse(json['dataTime']),
-        itemcode = json['itemCode'],
-        gyeonggi = double.parse(json['gyeonggi'] ?? '0');
+        itemCode = json['itemCode'];
 }
