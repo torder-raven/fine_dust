@@ -8,6 +8,7 @@ class DustInfo {
     required this.dateTime,
     required this.status,
   });
+
 }
 
 
