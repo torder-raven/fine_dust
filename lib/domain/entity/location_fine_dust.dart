@@ -1,16 +1,15 @@
 import 'package:fine_dust/domain/entity/dust_info.dart';
 import 'package:fine_dust/domain/entity/location_code.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class LocationFineDust {
-  LocationFineDust({
-    required this.locationCode,
-    required this.fineDust,
-    required this.ultraFineDust,
-    required this.ozone,
-  });
+part 'location_fine_dust.freezed.dart';
 
-  final LocationCode locationCode;
-  final DustInfo fineDust;
-  final DustInfo ultraFineDust;
-  final DustInfo ozone;
+@freezed
+class LocationFineDust with _$LocationFineDust {
+  factory LocationFineDust({
+    required LocationCode locationCode,
+    required DustInfo fineDust,
+    required DustInfo ultraFineDust,
+    required DustInfo ozone,
+  }) = _LocationFineDust;
 }
