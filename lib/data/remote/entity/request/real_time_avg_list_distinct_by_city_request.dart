@@ -1,10 +1,12 @@
-import 'package:fine_dust/presentation/util/env_keys.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-class RealTimeAvgListDistinctByProvinceRequest {
-  final String itemCode;
+import '../../../../domain/entity/air_quailty_type.dart';
+import '../../../../presentation/util/env_keys.dart';
 
-  RealTimeAvgListDistinctByProvinceRequest({
+class RealTimeAvgListDistinctByCityRequest {
+  final AirQualityType itemCode;
+
+  RealTimeAvgListDistinctByCityRequest({
     required this.itemCode,
   });
 
@@ -12,9 +14,8 @@ class RealTimeAvgListDistinctByProvinceRequest {
     return {
       "serviceKey": dotenv.env[EnvKeys.SERVICE_KEY]!,
       "returnType": "json",
-      "itemCode": itemCode,
+      "itemCode": itemCode.code,
       "dataGubun": "HOUR",
-      "searchCondition": "WEEK",
     };
   }
 }
