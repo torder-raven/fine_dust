@@ -5,6 +5,7 @@ class DetailState with _$DetailState {
   const factory DetailState({
     required DetailStatus status,
     LocationTotalInfo? locationTotalInfo,
+    bool? isBookmarkedLocation,
   }) = _DetailState;
 }
 

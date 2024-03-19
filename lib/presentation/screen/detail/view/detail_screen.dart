@@ -1,6 +1,10 @@
 import 'package:fine_dust/domain/entity/location_code.dart';
 import 'package:fine_dust/domain/entity/air_quailty_type.dart';
 import 'package:fine_dust/domain/entity/location_total_info.dart';
+import 'package:fine_dust/domain/repository/bookmark_repository.dart';
+import 'package:fine_dust/domain/usecase/bookmark/bookmark_location_uscase.dart';
+import 'package:fine_dust/domain/usecase/bookmark/delete_bookmark_usecase.dart';
+import 'package:fine_dust/domain/usecase/bookmark/get_is_bookmarked_location_usecase.dart';
 import 'package:fine_dust/domain/usecase/dustInfo/get_local_air_info_usecase.dart';
 import 'package:fine_dust/presentation/screen/detail/view/air_quality_view.dart';
 import 'package:flutter/material.dart';
@@ -28,10 +32,19 @@ class DetailScreen extends StatelessWidget {
           getLocalAirInfoUsecase: GetLocalAirInfoUsecase(
             repository: context.read<FineDustRepository>(),
           ),
+          bookmarkLocationUsecase: BookmarkLocationUsecase(
+            repository: context.read<BookmarkRepository>(),
+          ),
+          deleteBookmarkUsecase: DeleteBookmarkUsecase(
+            repository: context.read<BookmarkRepository>(),
+          ),
+          getIsBookmarkedLocationUsecase: GetIsBookmarkedLocationUsecase(
+            repository: context.read<BookmarkRepository>(),
+          ),
         )..add(DetailEvent.started(locationCode)),
         child: BlocBuilder<DetailBloc, DetailState>(
           builder: (context, state) {
-            if(state.status == DetailStatus.success) {
+            if (state.status == DetailStatus.success) {
               return Scaffold(
                 body: Container(
                   decoration: BoxDecoration(
@@ -47,6 +60,20 @@ class DetailScreen extends StatelessWidget {
                   child: CustomScrollView(
                     slivers: [
                       SliverAppBar(
+                        actions: [
+                          IconButton(
+                            onPressed: () {
+                              context.read<DetailBloc>().add(
+                                  DetailEvent.onPressBookmarked(locationCode));
+                            },
+                            icon: Icon(
+                              state.isBookmarkedLocation == true
+                                  ? Icons.star_rounded
+                                  : Icons.star_border_rounded,
+                              color: Colors.yellow,
+                            ),
+                          )
+                        ],
                         pinned: true,
                         expandedHeight: 200.0,
                         shadowColor: Colors.black,
@@ -69,35 +96,40 @@ class DetailScreen extends StatelessWidget {
                             AirQualityView(
                               airQualityType: AirQualityType.FINE_DUST,
                               airQualityInfo:
-                              state.locationTotalInfo!.fineDustList.first,
+                                  state.locationTotalInfo!.fineDustList.first,
                               onTap: () => showAirQualityBottomSheet(
                                 context: context,
-                                locationCode: state.locationTotalInfo!.locationCode,
+                                locationCode:
+                                    state.locationTotalInfo!.locationCode,
                                 airQualityType: AirQualityType.FINE_DUST,
                                 airQualityInfoList:
-                                state.locationTotalInfo!.fineDustList,
+                                    state.locationTotalInfo!.fineDustList,
                               ),
                             ),
                             AirQualityView(
                               airQualityType: AirQualityType.ULTRA_FINE_DUST,
-                              airQualityInfo:
-                              state.locationTotalInfo!.ultraFineDustList.first,
+                              airQualityInfo: state
+                                  .locationTotalInfo!.ultraFineDustList.first,
                               onTap: () => showAirQualityBottomSheet(
                                 context: context,
-                                locationCode: state.locationTotalInfo!.locationCode,
+                                locationCode:
+                                    state.locationTotalInfo!.locationCode,
                                 airQualityType: AirQualityType.ULTRA_FINE_DUST,
                                 airQualityInfoList:
-                                state.locationTotalInfo!.ultraFineDustList,
+                                    state.locationTotalInfo!.ultraFineDustList,
                               ),
                             ),
                             AirQualityView(
                               airQualityType: AirQualityType.OZONE,
-                              airQualityInfo: state.locationTotalInfo!.ozoneList.first,
+                              airQualityInfo:
+                                  state.locationTotalInfo!.ozoneList.first,
                               onTap: () => showAirQualityBottomSheet(
                                 context: context,
-                                locationCode: state.locationTotalInfo!.locationCode,
+                                locationCode:
+                                    state.locationTotalInfo!.locationCode,
                                 airQualityType: AirQualityType.OZONE,
-                                airQualityInfoList: state.locationTotalInfo!.ozoneList,
+                                airQualityInfoList:
+                                    state.locationTotalInfo!.ozoneList,
                               ),
                             ),
                           ],
