@@ -35,7 +35,8 @@ class LocationFineDustBloc
         locationFineDustList: locationFineDustList,
       ));
     } catch (e) {
-      emit(state.copyWith(status: LocationFineDustStatus.failure));
+      emit(state.copyWith(
+          status: LocationFineDustStatus.failure, locationFineDustList: []));
     }
   }
 }

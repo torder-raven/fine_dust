@@ -19,7 +19,7 @@ class LocationFineDustList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (list.isEmpty) {
-      return emptyListView();
+      return emptyListView(context);
     }
 
     return RefreshIndicator(
@@ -27,7 +27,9 @@ class LocationFineDustList extends StatelessWidget {
       child: ListView.separated(
         itemBuilder: (context, index) {
           return GestureDetector(
-            onTap: () { itemTapCallback(index); },
+            onTap: () {
+              itemTapCallback(index);
+            },
             child: LocationFineDustCard(locationFineDust: list[index]),
           );
         },
@@ -41,9 +43,23 @@ class LocationFineDustList extends StatelessWidget {
     );
   }
 
-  Widget emptyListView() {
-    return const Center(
-      child: Text(Strings.LOCATION_FINE_INFO_IS_EMPTY),
+  Widget emptyListView(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text(Strings.LOCATION_FINE_INFO_IS_EMPTY),
+          const SizedBox(height: 16.0),
+          CircleAvatar(
+            backgroundColor: Theme.of(context).primaryColor,
+            child: IconButton(
+              color: Colors.white,
+              onPressed: refreshCallback,
+              icon: const Icon(Icons.refresh),
+            ),
+          )
+        ],
+      ),
     );
   }
 }

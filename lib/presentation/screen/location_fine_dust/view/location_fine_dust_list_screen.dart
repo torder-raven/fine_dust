@@ -70,13 +70,42 @@ class _LocationFineDustListScreenState
     );
   }
 
-  Widget loading() {
+  Widget locationFineDustList() {
+    return Expanded(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: BlocConsumer<LocationFineDustBloc, LocationFineDustState>(
+          listener: (context, state) {
+            if (state.status == LocationFineDustStatus.failure) {
+              showErrorSnackBar(context);
+            }
+          },
+          builder: (context, state) {
+            return BlocBuilder<LocationFineDustBloc, LocationFineDustState>(
+              builder: (context, state) {
+                return Stack(
+                  children: [
+                    if (state.locationFineDustList != null)
+                      renderList(context, state.locationFineDustList!),
+                    if (state.status == LocationFineDustStatus.loading)
+                      renderLoading(),
+                  ],
+                );
+              },
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget renderLoading() {
     return const Center(
       child: CircularProgressIndicator(),
     );
   }
 
-  Widget success(BuildContext context, List<LocationFineDust> list) {
+  Widget renderList(BuildContext context, List<LocationFineDust> list) {
     return LocationFineDustList(
       list: list,
       refreshCallback: () async {
@@ -94,30 +123,9 @@ class _LocationFineDustListScreenState
     // todo go to detail screen
   }
 
-  Widget error() {
-    return const Center(
-      child: Text(Strings.LOCATION_FINE_INFO_ERROR),
-    );
-  }
-
-  locationFineDustList() {
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: BlocBuilder<LocationFineDustBloc, LocationFineDustState>(
-          builder: (context, state) {
-            switch (state.status) {
-              case LocationFineDustStatus.initial:
-              case LocationFineDustStatus.loading:
-                return loading();
-              case LocationFineDustStatus.success:
-                return success(context, state.locationFineDustList!);
-              case LocationFineDustStatus.failure:
-                return error();
-            }
-          },
-        ),
-      ),
-    );
+  void showErrorSnackBar(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      content: Text(Strings.LOCATION_FINE_INFO_ERROR),
+    ));
   }
 }
