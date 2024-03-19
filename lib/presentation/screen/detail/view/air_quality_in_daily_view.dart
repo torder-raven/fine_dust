@@ -2,12 +2,12 @@ import 'package:fine_dust/presentation/screen/detail/view/detail_card_view.dart'
 import 'package:flutter/material.dart';
 
 import '../../../../domain/entity/dust_info.dart';
-import '../../../../domain/entity/item_code.dart';
+import '../../../../domain/entity/air_quailty_type.dart';
 import 'air_quality_in_hour_view.dart';
 
 class AirQualityInDailyView extends StatelessWidget {
   final String title;
-  final ItemCode airQualityType;
+  final AirQualityType airQualityType;
   final List<DustInfo> airQualityList;
 
   const AirQualityInDailyView({

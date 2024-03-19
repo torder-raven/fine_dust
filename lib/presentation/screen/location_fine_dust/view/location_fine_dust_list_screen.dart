@@ -7,6 +7,7 @@ import 'package:fine_dust/domain/usecase/bookmark/delete_bookmark_usecase.dart';
 import 'package:fine_dust/domain/usecase/bookmark/get_bookmark_list_usecase.dart';
 import 'package:fine_dust/domain/usecase/dustInfo/get_local_fine_dust_info_list_usecase.dart';
 import 'package:fine_dust/presentation/constant/strings.dart';
+import 'package:fine_dust/presentation/screen/detail/view/detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -191,7 +192,14 @@ class _LocationFineDustListScreenState
   }
 
   void goToDetailScreen(LocationCode locationCode) {
-    // todo go to detail screen
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+          return DetailScreen(locationCode: locationCode);
+        },
+      ),
+    );
   }
 
   void showErrorSnackBar(BuildContext context) {

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AirQualityLevelBar extends StatefulWidget {
-  final double levelMaxValue;
-  final int rawValue;
+  final num levelMaxValue;
+  final num rawValue;
 
   const AirQualityLevelBar({
     required this.levelMaxValue,

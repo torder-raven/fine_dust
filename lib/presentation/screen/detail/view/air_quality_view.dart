@@ -1,12 +1,11 @@
 import 'package:fine_dust/domain/entity/dust_info.dart';
+import 'package:fine_dust/domain/entity/air_quailty_type.dart';
 import 'package:fine_dust/presentation/screen/detail/view/air_quality_level_bar.dart';
 import 'package:fine_dust/presentation/screen/detail/view/detail_card_view.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../domain/entity/item_code.dart';
-
 class AirQualityView extends StatelessWidget {
-  final ItemCode airQualityType;
+  final AirQualityType airQualityType;
   final DustInfo airQualityInfo;
   final Function()? onTap;
 
@@ -20,7 +19,7 @@ class AirQualityView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DetailCardView(
-      title: airQualityType.raw,
+      title: airQualityType.displayName,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -40,7 +39,7 @@ class AirQualityView extends StatelessWidget {
           ),
           SizedBox(height: 8.0),
           AirQualityLevelBar(
-            levelMaxValue: 150,
+            levelMaxValue: airQualityType.level.last,
             rawValue: airQualityInfo.rawValue,
           )
         ],
