@@ -1,3 +1,4 @@
+import 'package:fine_dust/domain/entity/location_code.dart';
 import 'package:fine_dust/domain/repository/bookmark_repositort.dart';
 
 class GetIsBookmarkedLocationUsecase {
@@ -6,6 +7,6 @@ class GetIsBookmarkedLocationUsecase {
 
   final BookmarkRepository _repository;
 
-  Future<bool> call({required int locationId}) =>
-      _repository.getIsBookmarkedLocation(locationId: locationId);
+  Future<bool> call({required LocationCode locationCode}) =>
+      _repository.getIsBookmarkedLocation(locationCode: locationCode);
 }
