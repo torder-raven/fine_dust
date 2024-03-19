@@ -8,7 +8,7 @@ class DetailCardView extends StatelessWidget {
   const DetailCardView({
     required this.title,
     required this.child,
-    required this.onTap,
+    this.onTap,
     super.key,
   });
 

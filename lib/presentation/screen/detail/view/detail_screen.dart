@@ -1,16 +1,13 @@
 import 'package:fine_dust/domain/entity/item_code.dart';
 import 'package:fine_dust/domain/entity/location_code.dart';
 import 'package:fine_dust/domain/entity/location_total_info.dart';
-import 'package:fine_dust/domain/usecase/dustInfo/get_local_air_info_usecase.dart';
 import 'package:fine_dust/presentation/screen/detail/view/air_quality_view.dart';
-import 'package:fine_dust/presentation/screen/detail/view/air_quality_view.dart';
-import 'package:fine_dust/presentation/screen/detail/view/air_quality_view.dart';
-import 'package:fine_dust/presentation/screen/detail/view/detail_card_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../domain/entity/dust_info.dart';
 import '../bloc/detail_bloc.dart';
+import 'air_quality_in_daily_view.dart';
 
 class DetailScreen extends StatelessWidget {
   const DetailScreen({super.key});
@@ -25,6 +22,11 @@ class DetailScreen extends StatelessWidget {
           dateTime: DateTime.now(),
           status: "좋음",
         ),
+        DustInfo(
+          rawValue: 0,
+          dateTime: DateTime.now(),
+          status: "좋음",
+        ),
       ],
       ultraFineDustList: [
         DustInfo(
@@ -32,10 +34,45 @@ class DetailScreen extends StatelessWidget {
           dateTime: DateTime.now(),
           status: "좋음",
         ),
+        DustInfo(
+          rawValue: 0,
+          dateTime: DateTime.now(),
+          status: "좋음",
+        ),
+        DustInfo(
+          rawValue: 0,
+          dateTime: DateTime.now(),
+          status: "좋음",
+        ),
       ],
       ozoneList: [
         DustInfo(
           rawValue: 20,
+          dateTime: DateTime.now(),
+          status: "좋음",
+        ),
+        DustInfo(
+          rawValue: 0,
+          dateTime: DateTime.now(),
+          status: "좋음",
+        ),
+        DustInfo(
+          rawValue: 0,
+          dateTime: DateTime.now(),
+          status: "좋음",
+        ),
+        DustInfo(
+          rawValue: 0,
+          dateTime: DateTime.now(),
+          status: "좋음",
+        ),
+        DustInfo(
+          rawValue: 0,
+          dateTime: DateTime.now(),
+          status: "좋음",
+        ),
+        DustInfo(
+          rawValue: 0,
           dateTime: DateTime.now(),
           status: "좋음",
         ),
@@ -83,33 +120,33 @@ class DetailScreen extends StatelessWidget {
                       delegate: SliverChildListDelegate(
                         [
                           AirQualityView(
-                            type: ItemCode.FINE_DUST,
-                            dustInfo: locationTotalInfo.fineDustList.first,
+                            airQualityType: ItemCode.FINE_DUST,
+                            airQualityInfo: locationTotalInfo.fineDustList.first,
                             onTap: () => showAirQualityBottomSheet(
                               context: context,
                               locationCode: locationTotalInfo.locationCode,
-                              itemCode: ItemCode.FINE_DUST,
-                              dustInfo: locationTotalInfo.fineDustList,
+                              airQualityType: ItemCode.FINE_DUST,
+                              airQualityInfoList: locationTotalInfo.fineDustList,
                             ),
                           ),
                           AirQualityView(
-                            type: ItemCode.ULTRA_FINE_DUST,
-                            dustInfo: locationTotalInfo.ultraFineDustList.first,
+                            airQualityType: ItemCode.ULTRA_FINE_DUST,
+                            airQualityInfo: locationTotalInfo.ultraFineDustList.first,
                             onTap: () => showAirQualityBottomSheet(
                               context: context,
                               locationCode: locationTotalInfo.locationCode,
-                              itemCode: ItemCode.ULTRA_FINE_DUST,
-                              dustInfo: locationTotalInfo.ultraFineDustList,
+                              airQualityType: ItemCode.ULTRA_FINE_DUST,
+                              airQualityInfoList: locationTotalInfo.ultraFineDustList,
                             ),
                           ),
                           AirQualityView(
-                            type: ItemCode.OZONE,
-                            dustInfo: locationTotalInfo.ozoneList.first,
+                            airQualityType: ItemCode.OZONE,
+                            airQualityInfo: locationTotalInfo.ozoneList.first,
                             onTap: () => showAirQualityBottomSheet(
                               context: context,
                               locationCode: locationTotalInfo.locationCode,
-                              itemCode: ItemCode.OZONE,
-                              dustInfo: locationTotalInfo.ozoneList,
+                              airQualityType: ItemCode.OZONE,
+                              airQualityInfoList: locationTotalInfo.ozoneList,
                             ),
                           ),
                         ],
@@ -128,8 +165,8 @@ class DetailScreen extends StatelessWidget {
   showAirQualityBottomSheet({
     required BuildContext context,
     required LocationCode locationCode,
-    required ItemCode itemCode,
-    required List<DustInfo> dustInfo,
+    required ItemCode airQualityType,
+    required List<DustInfo> airQualityInfoList,
   }) {
     showModalBottomSheet(
       context: context,
@@ -173,9 +210,14 @@ class DetailScreen extends StatelessWidget {
               delegate: SliverChildListDelegate(
                 [
                   AirQualityView(
-                    type: itemCode,
-                    dustInfo: dustInfo.first,
+                    airQualityType: airQualityType,
+                    airQualityInfo: airQualityInfoList.first,
                   ),
+                  AirQualityInDailyView(
+                    title: "최근 ${airQualityInfoList.length}시간 내 ${airQualityType.raw} 지수", // TODO 리소스화
+                    airQualityType: airQualityType,
+                    airQualityList: airQualityInfoList,
+                  )
                 ],
               ),
             ),

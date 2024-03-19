@@ -6,13 +6,13 @@ import 'package:flutter/material.dart';
 import '../../../../domain/entity/item_code.dart';
 
 class AirQualityView extends StatelessWidget {
-  final ItemCode type;
-  final DustInfo dustInfo;
+  final ItemCode airQualityType;
+  final DustInfo airQualityInfo;
   final Function()? onTap;
 
   const AirQualityView({
-    required this.type,
-    required this.dustInfo,
+    required this.airQualityType,
+    required this.airQualityInfo,
     this.onTap,
     super.key,
   });
@@ -20,11 +20,7 @@ class AirQualityView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DetailCardView(
-      title: switch (type) { // TODO 리소스화
-        ItemCode.FINE_DUST => "미세먼지(PM10)",
-        ItemCode.ULTRA_FINE_DUST => "초미세먼지(PM2.5)",
-        ItemCode.OZONE => "오존"
-      },
+      title: airQualityType.raw,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -33,7 +29,7 @@ class AirQualityView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "${dustInfo.status}(${dustInfo.rawValue})",
+                "${airQualityInfo.status}(${airQualityInfo.rawValue})", // TODO 리소스화
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -45,7 +41,7 @@ class AirQualityView extends StatelessWidget {
           SizedBox(height: 8.0),
           AirQualityLevelBar(
             levelMaxValue: 150,
-            rawValue: dustInfo.rawValue,
+            rawValue: airQualityInfo.rawValue,
           )
         ],
       ),
