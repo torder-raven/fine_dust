@@ -1,6 +1,6 @@
 import 'package:fine_dust/data/remote/datasource/bookmark_firestore.dart';
 import 'package:fine_dust/domain/entity/location_code.dart';
-import 'package:fine_dust/domain/repository/bookmark_repositort.dart';
+import 'package:fine_dust/domain/repository/bookmark_repository.dart';
 
 class BookmarkRepositoryImpl implements BookmarkRepository {
   final BookmarkFirestore _firestore;
