@@ -8,10 +8,12 @@ import '../../../../domain/entity/item_code.dart';
 class AirQualityView extends StatelessWidget {
   final ItemCode type;
   final DustInfo dustInfo;
+  final Function()? onTap;
 
   const AirQualityView({
     required this.type,
     required this.dustInfo,
+    this.onTap,
     super.key,
   });
 
@@ -47,6 +49,7 @@ class AirQualityView extends StatelessWidget {
           )
         ],
       ),
+      onTap: onTap,
     );
   }
 }
