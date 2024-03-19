@@ -46,6 +46,7 @@ class FineDustRepositoryImpl implements FineDustRepository {
         await getOzoneInfoListInRealTimeAvgListByCity();
 
     return LocationCode.values
+        .where((locationCode) => locationCode != LocationCode.undefined)
         .map(
           (locationCode) => LocationFineDust(
             locationCode: locationCode,
@@ -67,6 +68,7 @@ class FineDustRepositoryImpl implements FineDustRepository {
         await getOzoneInfoListInRealTimeAvgListByCity();
 
     LocationCode _locationCode = LocationCode.values
+        .where((locationCode) => locationCode != LocationCode.undefined)
         .singleWhere((element) => element.code == locationCode);
 
     return LocationTotalInfo(
