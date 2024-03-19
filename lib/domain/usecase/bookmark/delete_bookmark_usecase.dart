@@ -1,4 +1,5 @@
-import 'package:fine_dust/domain/repository/bookmark_repositort.dart';
+import 'package:fine_dust/domain/entity/location_code.dart';
+import 'package:fine_dust/domain/repository/bookmark_repository.dart';
 
 class DeleteBookmarkUsecase {
   DeleteBookmarkUsecase({
@@ -7,6 +8,6 @@ class DeleteBookmarkUsecase {
 
   final BookmarkRepository _repository;
 
-  Future<bool> call({required int locationCode}) =>
+  Future<bool> call({required LocationCode locationCode}) =>
       _repository.deleteBookmark(locationCode: locationCode);
 }

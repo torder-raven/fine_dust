@@ -1,4 +1,6 @@
-import 'package:fine_dust/domain/repository/bookmark_repositort.dart';
+import 'package:fine_dust/domain/repository/bookmark_repository.dart';
+
+import '../../entity/location_code.dart';
 
 class BookmarkLocationUsecase {
   BookmarkLocationUsecase({required BookmarkRepository repository})
@@ -6,6 +8,5 @@ class BookmarkLocationUsecase {
 
   final BookmarkRepository _repository;
 
-  Future<bool> call({required int locationCode}) =>
-      _repository.bookmarkLocation(locationCode: locationCode);
+  call({required LocationCode locationCode}) => _repository.bookmarkLocation(locationCode: locationCode);
 }

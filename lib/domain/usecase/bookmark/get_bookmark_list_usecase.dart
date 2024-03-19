@@ -1,4 +1,4 @@
-import 'package:fine_dust/domain/repository/bookmark_repositort.dart';
+import 'package:fine_dust/domain/repository/bookmark_repository.dart';
 
 class GetBookmarkListUsecase {
   GetBookmarkListUsecase({required BookmarkRepository repository})
