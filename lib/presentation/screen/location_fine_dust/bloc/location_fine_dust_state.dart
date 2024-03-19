@@ -5,6 +5,7 @@ class LocationFineDustState with _$LocationFineDustState {
   factory LocationFineDustState({
     required LocationFineDustStatus status,
     List<LocationFineDust>? locationFineDustList,
+    List<LocationFineDust>? bookmarkList,
   }) = _LocationFineDustState;
 }
 

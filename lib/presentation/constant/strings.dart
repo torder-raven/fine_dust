@@ -12,5 +12,6 @@ class Strings {
   static const MICRO_PER_CUBIC_METER_UNIT = "㎍/㎥";
   static const PARTS_PER_MILLION_UNIT = "ppm";
 
+  static const BOOKMARK_TITLE = "즐겨찾기";
 
 }

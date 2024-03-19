@@ -8,6 +8,6 @@ class DeleteBookmarkUsecase {
 
   final BookmarkRepository _repository;
 
-  Future<bool> call({required LocationCode locationCode}) =>
+  call({required LocationCode locationCode}) =>
       _repository.deleteBookmark(locationCode: locationCode);
 }
