@@ -35,7 +35,7 @@ class LocationFineDustList extends StatelessWidget {
       onRefresh: refreshCallback,
       child: ListView.separated(
         itemBuilder: (context, index) {
-          return GestureDetector(
+          return InkWell(
             onTap: () {
               itemTapCallback(list[index].locationCode);
             },
