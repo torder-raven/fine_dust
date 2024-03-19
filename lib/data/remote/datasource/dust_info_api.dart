@@ -3,6 +3,7 @@ import 'package:fine_dust/data/remote/entity/request/real_time_avg_list_distinct
 import 'package:fine_dust/data/remote/entity/request/real_time_avg_list_distinct_by_province_request.dart';
 import 'package:fine_dust/data/remote/entity/response/real_time_avg_list_distinct_by_city_response.dart';
 import 'package:fine_dust/data/remote/entity/response/real_time_avg_list_distinct_by_province_response.dart';
+import 'package:fine_dust/domain/entity/location_code.dart';
 import 'package:fine_dust/presentation/util/env_keys.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 

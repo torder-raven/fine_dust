@@ -22,4 +22,6 @@ enum LocationCode {
 
   final int code;
   final String locationName;
+
+
 }
