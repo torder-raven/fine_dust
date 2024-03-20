@@ -6,13 +6,16 @@ import 'package:fine_dust/domain/usecase/bookmark/bookmark_location_uscase.dart'
 import 'package:fine_dust/domain/usecase/bookmark/delete_bookmark_usecase.dart';
 import 'package:fine_dust/domain/usecase/bookmark/get_bookmark_list_usecase.dart';
 import 'package:fine_dust/domain/usecase/dustInfo/get_local_fine_dust_info_list_usecase.dart';
+import 'package:fine_dust/presentation/constant/colors.dart';
 import 'package:fine_dust/presentation/constant/strings.dart';
+import 'package:fine_dust/presentation/screen/component/loading.dart';
+import 'package:fine_dust/presentation/screen/component/slidable_item_list/slidable_item_list.dart';
 import 'package:fine_dust/presentation/screen/detail/view/detail_screen.dart';
+import 'package:fine_dust/presentation/screen/location_fine_dust/view/location_fine_dust_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/location_fine_dust_bloc.dart';
-import 'location_fine_dust_list.dart';
 
 class LocationFineDustListScreen extends StatefulWidget {
   const LocationFineDustListScreen({super.key});
@@ -38,6 +41,7 @@ class _LocationFineDustListScreenState
           title: const Text(Strings.FINE_DUST_TITLE),
         ),
         body: SafeArea(
+          bottom: false,
           child: BlocConsumer<LocationFineDustBloc, LocationFineDustState>(
             listener: (context, state) {
               if (state.status == LocationFineDustStatus.failure) {
@@ -47,31 +51,46 @@ class _LocationFineDustListScreenState
             builder: (context, state) {
               return BlocBuilder<LocationFineDustBloc, LocationFineDustState>(
                 builder: (context, state) {
-                  return Stack(
-                    children: [
-                      body(
-                        bookmarkList: state.bookmarkList ?? [],
-                        locationFineDustList2: state.locationFineDustList ?? [],
-                        refreshCallback: () async {
-                          context
-                              .read<LocationFineDustBloc>()
-                              .add(const LocationFineDustEvent.fetch());
-                        },
-                        itemTapCallback: goToDetailScreen,
-                        bookmarkCallback: (LocationCode locationCode) {
-                          context.read<LocationFineDustBloc>().add(
-                              LocationFineDustEvent.bookmark(locationCode));
-                        },
-                        deleteBookmarkCallback: (LocationCode locationCode) {
-                          context.read<LocationFineDustBloc>().add(
-                              LocationFineDustEvent.deleteBookmark(
-                                  locationCode));
-                        },
+                  return Container(
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          ColorResource.PRIMARY_COLOR,
+                          ColorResource.BACKGROUND_COLOR
+                        ],
                       ),
-                      if (state.status == LocationFineDustStatus.loading)
-                        renderLoading(),
-                    ],
+                    ),
+                    child: Stack(
+                      children: [
+                        body(
+                          bookmarkList: state.bookmarkList ?? [],
+                          locationFineDustList2:
+                              state.locationFineDustList ?? [],
+                          refreshCallback: () async {
+                            context
+                                .read<LocationFineDustBloc>()
+                                .add(const LocationFineDustEvent.fetch());
+                          },
+                          itemClickCallback: (locationFineDust) {
+                            goToDetailScreen(locationFineDust.locationCode);
+                          },
+                          bookmarkCallback: (locationFineDust) {
+                            context.read<LocationFineDustBloc>().add(
+                                LocationFineDustEvent.bookmark(
+                                    locationFineDust.locationCode));
+                          },
+                          deleteBookmarkCallback: (locationFineDust) {
+                            context.read<LocationFineDustBloc>().add(
+                                LocationFineDustEvent.deleteBookmark(
+                                    locationFineDust.locationCode));
+                          },
+                        ),
+                        if (state.status == LocationFineDustStatus.loading)
                           const Loading(),
+                      ],
+                    ),
                   );
                 },
               );
@@ -104,9 +123,9 @@ class _LocationFineDustListScreenState
     required List<LocationFineDust> bookmarkList,
     required List<LocationFineDust> locationFineDustList2,
     required RefreshCallback refreshCallback,
-    required ItemTapCallback itemTapCallback,
-    required BookmarkCallback bookmarkCallback,
-    required BookmarkCallback deleteBookmarkCallback,
+    required LocationFineDustCallback itemClickCallback,
+    required SlidableActionCallback bookmarkCallback,
+    required SlidableActionCallback deleteBookmarkCallback,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -115,17 +134,23 @@ class _LocationFineDustListScreenState
           ...bookmarkListViews(
             bookmarkList: bookmarkList,
             refreshCallback: refreshCallback,
-            itemTapCallback: itemTapCallback,
+            itemClickCallback: itemClickCallback,
             deleteBookmarkCallback: deleteBookmarkCallback,
           ),
         locationFineDustTitle(Strings.LOCATION_FINE_DUST_TITLE),
         locationFineDustList(
-            list: locationFineDustList2,
-            refreshCallback: refreshCallback,
-            itemTapCallback: itemTapCallback,
-            canBookmark: true,
-            bookmarkCallback: bookmarkCallback,
-            deleteBookmarkCallback: deleteBookmarkCallback),
+          list: locationFineDustList2,
+          refreshCallback: refreshCallback,
+          itemClickCallback: itemClickCallback,
+          startActionList: [
+            SlidableItemAction<LocationFineDust>(
+              backgroundColor: ColorResource.PRIMARY_COLOR,
+              foregroundColor: Colors.yellow,
+              icon: Icons.star_border_outlined,
+              callback: bookmarkCallback,
+            ),
+          ],
+        ),
       ],
     );
   }
@@ -133,16 +158,24 @@ class _LocationFineDustListScreenState
   List<Widget> bookmarkListViews({
     required List<LocationFineDust> bookmarkList,
     required RefreshCallback refreshCallback,
-    required ItemTapCallback itemTapCallback,
-    required BookmarkCallback deleteBookmarkCallback,
+    required LocationFineDustCallback itemClickCallback,
+    required SlidableActionCallback deleteBookmarkCallback,
   }) {
     return [
       locationFineDustTitle(Strings.BOOKMARK_TITLE),
       locationFineDustList(
-          list: bookmarkList,
-          refreshCallback: refreshCallback,
-          itemTapCallback: itemTapCallback,
-          deleteBookmarkCallback: deleteBookmarkCallback),
+        list: bookmarkList,
+        refreshCallback: refreshCallback,
+        itemClickCallback: itemClickCallback,
+        startActionList: [
+          SlidableItemAction<LocationFineDust>(
+            backgroundColor: ColorResource.PRIMARY_COLOR,
+            foregroundColor: Colors.yellow,
+            icon: Icons.star,
+            callback: deleteBookmarkCallback,
+          ),
+        ],
+      ),
     ];
   }
 
@@ -163,21 +196,20 @@ class _LocationFineDustListScreenState
   Widget locationFineDustList({
     required List<LocationFineDust> list,
     required RefreshCallback refreshCallback,
-    required ItemTapCallback itemTapCallback,
-    bool canBookmark = false,
-    BookmarkCallback? bookmarkCallback,
-    required BookmarkCallback deleteBookmarkCallback,
+    required LocationFineDustCallback itemClickCallback,
+    required List<SlidableItemAction<LocationFineDust>> startActionList,
   }) {
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: LocationFineDustList(
+        child: SlidableItemList<LocationFineDust>(
           list: list,
+          itemClickCallback: itemClickCallback,
           refreshCallback: refreshCallback,
-          itemTapCallback: itemTapCallback,
-          canBookmark: canBookmark,
-          bookmarkCallback: bookmarkCallback,
-          deleteBookmarkCallback: deleteBookmarkCallback,
+          startActionList: startActionList,
+          itemBuilder: <LocationFineDust>(context, locationFineDust) {
+            return LocationFineDustCard(locationFineDust: locationFineDust);
+          },
         ),
       ),
     );
@@ -200,3 +232,5 @@ class _LocationFineDustListScreenState
     ));
   }
 }
+
+typedef LocationFineDustCallback = Function(LocationFineDust locationFineDust);

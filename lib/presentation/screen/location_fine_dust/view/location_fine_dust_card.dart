@@ -11,29 +11,21 @@ class LocationFineDustCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: Theme.of(context).primaryColor,
-        ),
-        borderRadius: BorderRadius.circular(16.0),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            _LeftInfo(
-              location: locationFineDust.locationCode.locationName,
-              dateTime: locationFineDust.fineDust.dateTime,
-            ),
-            _RightInfo(
-              fineDust: locationFineDust.fineDust,
-              ultraFineDust: locationFineDust.ultraFineDust,
-              ozone: locationFineDust.ozone,
-            ),
-          ],
-        ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          _LeftInfo(
+            location: locationFineDust.locationCode.locationName,
+            dateTime: locationFineDust.fineDust.dateTime,
+          ),
+          _RightInfo(
+            fineDust: locationFineDust.fineDust,
+            ultraFineDust: locationFineDust.ultraFineDust,
+            ozone: locationFineDust.ozone,
+          ),
+        ],
       ),
     );
   }
@@ -59,10 +51,15 @@ class _LeftInfo extends StatelessWidget {
           style: Theme.of(context)
               .textTheme
               .headlineMedium
-              ?.copyWith(fontWeight: FontWeight.w800),
+              ?.copyWith(color: Colors.white, fontWeight: FontWeight.w800),
         ),
-        Text(dateTime.toTimeString(),
-            style: Theme.of(context).textTheme.labelMedium),
+        Text(
+          dateTime.toTimeString(),
+          style: Theme.of(context)
+              .textTheme
+              .labelMedium
+              ?.copyWith(color: Colors.white),
+        ),
       ],
     );
   }
@@ -120,16 +117,17 @@ class _RightInfo extends StatelessWidget {
           child: Text(
             title,
             style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                  color: Colors.white,
                   fontWeight: FontWeight.w800,
                 ),
             textAlign: TextAlign.end,
           ),
         ),
         const SizedBox(width: 8.0),
-        Text(
-          dustInfo.toStateAndUnit(unit),
-          style: Theme.of(context).textTheme.labelMedium,
-        ),
+        Text(dustInfo.toStateAndUnit(unit),
+            style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                  color: Colors.white,
+                )),
       ],
     );
   }
