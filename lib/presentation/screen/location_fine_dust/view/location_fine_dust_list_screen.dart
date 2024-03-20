@@ -71,6 +71,7 @@ class _LocationFineDustListScreenState
                       if (state.status == LocationFineDustStatus.loading)
                         renderLoading(),
                     ],
+                          const Loading(),
                   );
                 },
               );
@@ -178,15 +179,6 @@ class _LocationFineDustListScreenState
           bookmarkCallback: bookmarkCallback,
           deleteBookmarkCallback: deleteBookmarkCallback,
         ),
-      ),
-    );
-  }
-
-  Widget renderLoading() {
-    return Container(
-      color: Colors.black.withAlpha(100),
-      child: const Center(
-        child: CircularProgressIndicator(),
       ),
     );
   }
