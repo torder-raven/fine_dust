@@ -115,7 +115,6 @@ class _LocationFineDustListScreenState
           GetBookmarkListUsecase(repository: bookmarkRepository),
     );
 
-    locationFineDustBloc.add(const LocationFineDustEvent.fetch());
     return locationFineDustBloc;
   }
 

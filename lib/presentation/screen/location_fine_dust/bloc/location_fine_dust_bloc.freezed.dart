@@ -19,7 +19,8 @@ mixin _$LocationFineDustEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() fetch,
-    required TResult Function(List<int> bookmarkList) refreshBookmarkList,
+    required TResult Function() refreshList,
+    required TResult Function() listenBookmarkStream,
     required TResult Function(LocationCode locationCode) bookmark,
     required TResult Function(LocationCode locationCode) deleteBookmark,
   }) =>
@@ -27,7 +28,8 @@ mixin _$LocationFineDustEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? fetch,
-    TResult? Function(List<int> bookmarkList)? refreshBookmarkList,
+    TResult? Function()? refreshList,
+    TResult? Function()? listenBookmarkStream,
     TResult? Function(LocationCode locationCode)? bookmark,
     TResult? Function(LocationCode locationCode)? deleteBookmark,
   }) =>
@@ -35,7 +37,8 @@ mixin _$LocationFineDustEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? fetch,
-    TResult Function(List<int> bookmarkList)? refreshBookmarkList,
+    TResult Function()? refreshList,
+    TResult Function()? listenBookmarkStream,
     TResult Function(LocationCode locationCode)? bookmark,
     TResult Function(LocationCode locationCode)? deleteBookmark,
     required TResult orElse(),
@@ -44,7 +47,8 @@ mixin _$LocationFineDustEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Fetch value) fetch,
-    required TResult Function(_RefreshBookmarkList value) refreshBookmarkList,
+    required TResult Function(_RefreshList value) refreshList,
+    required TResult Function(_ListenBookmarkStream value) listenBookmarkStream,
     required TResult Function(_Bookmark value) bookmark,
     required TResult Function(_DeleteBookmark value) deleteBookmark,
   }) =>
@@ -52,7 +56,8 @@ mixin _$LocationFineDustEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_RefreshBookmarkList value)? refreshBookmarkList,
+    TResult? Function(_RefreshList value)? refreshList,
+    TResult? Function(_ListenBookmarkStream value)? listenBookmarkStream,
     TResult? Function(_Bookmark value)? bookmark,
     TResult? Function(_DeleteBookmark value)? deleteBookmark,
   }) =>
@@ -60,7 +65,8 @@ mixin _$LocationFineDustEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Fetch value)? fetch,
-    TResult Function(_RefreshBookmarkList value)? refreshBookmarkList,
+    TResult Function(_RefreshList value)? refreshList,
+    TResult Function(_ListenBookmarkStream value)? listenBookmarkStream,
     TResult Function(_Bookmark value)? bookmark,
     TResult Function(_DeleteBookmark value)? deleteBookmark,
     required TResult orElse(),
@@ -126,7 +132,8 @@ class _$FetchImpl implements _Fetch {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() fetch,
-    required TResult Function(List<int> bookmarkList) refreshBookmarkList,
+    required TResult Function() refreshList,
+    required TResult Function() listenBookmarkStream,
     required TResult Function(LocationCode locationCode) bookmark,
     required TResult Function(LocationCode locationCode) deleteBookmark,
   }) {
@@ -137,7 +144,8 @@ class _$FetchImpl implements _Fetch {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? fetch,
-    TResult? Function(List<int> bookmarkList)? refreshBookmarkList,
+    TResult? Function()? refreshList,
+    TResult? Function()? listenBookmarkStream,
     TResult? Function(LocationCode locationCode)? bookmark,
     TResult? Function(LocationCode locationCode)? deleteBookmark,
   }) {
@@ -148,7 +156,8 @@ class _$FetchImpl implements _Fetch {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? fetch,
-    TResult Function(List<int> bookmarkList)? refreshBookmarkList,
+    TResult Function()? refreshList,
+    TResult Function()? listenBookmarkStream,
     TResult Function(LocationCode locationCode)? bookmark,
     TResult Function(LocationCode locationCode)? deleteBookmark,
     required TResult orElse(),
@@ -163,7 +172,8 @@ class _$FetchImpl implements _Fetch {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Fetch value) fetch,
-    required TResult Function(_RefreshBookmarkList value) refreshBookmarkList,
+    required TResult Function(_RefreshList value) refreshList,
+    required TResult Function(_ListenBookmarkStream value) listenBookmarkStream,
     required TResult Function(_Bookmark value) bookmark,
     required TResult Function(_DeleteBookmark value) deleteBookmark,
   }) {
@@ -174,7 +184,8 @@ class _$FetchImpl implements _Fetch {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_RefreshBookmarkList value)? refreshBookmarkList,
+    TResult? Function(_RefreshList value)? refreshList,
+    TResult? Function(_ListenBookmarkStream value)? listenBookmarkStream,
     TResult? Function(_Bookmark value)? bookmark,
     TResult? Function(_DeleteBookmark value)? deleteBookmark,
   }) {
@@ -185,7 +196,8 @@ class _$FetchImpl implements _Fetch {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Fetch value)? fetch,
-    TResult Function(_RefreshBookmarkList value)? refreshBookmarkList,
+    TResult Function(_RefreshList value)? refreshList,
+    TResult Function(_ListenBookmarkStream value)? listenBookmarkStream,
     TResult Function(_Bookmark value)? bookmark,
     TResult Function(_DeleteBookmark value)? deleteBookmark,
     required TResult orElse(),
@@ -202,108 +214,76 @@ abstract class _Fetch implements LocationFineDustEvent {
 }
 
 /// @nodoc
-abstract class _$$RefreshBookmarkListImplCopyWith<$Res> {
-  factory _$$RefreshBookmarkListImplCopyWith(_$RefreshBookmarkListImpl value,
-          $Res Function(_$RefreshBookmarkListImpl) then) =
-      __$$RefreshBookmarkListImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({List<int> bookmarkList});
+abstract class _$$RefreshListImplCopyWith<$Res> {
+  factory _$$RefreshListImplCopyWith(
+          _$RefreshListImpl value, $Res Function(_$RefreshListImpl) then) =
+      __$$RefreshListImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$RefreshBookmarkListImplCopyWithImpl<$Res>
-    extends _$LocationFineDustEventCopyWithImpl<$Res, _$RefreshBookmarkListImpl>
-    implements _$$RefreshBookmarkListImplCopyWith<$Res> {
-  __$$RefreshBookmarkListImplCopyWithImpl(_$RefreshBookmarkListImpl _value,
-      $Res Function(_$RefreshBookmarkListImpl) _then)
+class __$$RefreshListImplCopyWithImpl<$Res>
+    extends _$LocationFineDustEventCopyWithImpl<$Res, _$RefreshListImpl>
+    implements _$$RefreshListImplCopyWith<$Res> {
+  __$$RefreshListImplCopyWithImpl(
+      _$RefreshListImpl _value, $Res Function(_$RefreshListImpl) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? bookmarkList = null,
-  }) {
-    return _then(_$RefreshBookmarkListImpl(
-      null == bookmarkList
-          ? _value._bookmarkList
-          : bookmarkList // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$RefreshBookmarkListImpl implements _RefreshBookmarkList {
-  const _$RefreshBookmarkListImpl(final List<int> bookmarkList)
-      : _bookmarkList = bookmarkList;
-
-  final List<int> _bookmarkList;
-  @override
-  List<int> get bookmarkList {
-    if (_bookmarkList is EqualUnmodifiableListView) return _bookmarkList;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_bookmarkList);
-  }
+class _$RefreshListImpl implements _RefreshList {
+  const _$RefreshListImpl();
 
   @override
   String toString() {
-    return 'LocationFineDustEvent.refreshBookmarkList(bookmarkList: $bookmarkList)';
+    return 'LocationFineDustEvent.refreshList()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$RefreshBookmarkListImpl &&
-            const DeepCollectionEquality()
-                .equals(other._bookmarkList, _bookmarkList));
+        (other.runtimeType == runtimeType && other is _$RefreshListImpl);
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_bookmarkList));
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$RefreshBookmarkListImplCopyWith<_$RefreshBookmarkListImpl> get copyWith =>
-      __$$RefreshBookmarkListImplCopyWithImpl<_$RefreshBookmarkListImpl>(
-          this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() fetch,
-    required TResult Function(List<int> bookmarkList) refreshBookmarkList,
+    required TResult Function() refreshList,
+    required TResult Function() listenBookmarkStream,
     required TResult Function(LocationCode locationCode) bookmark,
     required TResult Function(LocationCode locationCode) deleteBookmark,
   }) {
-    return refreshBookmarkList(bookmarkList);
+    return refreshList();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? fetch,
-    TResult? Function(List<int> bookmarkList)? refreshBookmarkList,
+    TResult? Function()? refreshList,
+    TResult? Function()? listenBookmarkStream,
     TResult? Function(LocationCode locationCode)? bookmark,
     TResult? Function(LocationCode locationCode)? deleteBookmark,
   }) {
-    return refreshBookmarkList?.call(bookmarkList);
+    return refreshList?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? fetch,
-    TResult Function(List<int> bookmarkList)? refreshBookmarkList,
+    TResult Function()? refreshList,
+    TResult Function()? listenBookmarkStream,
     TResult Function(LocationCode locationCode)? bookmark,
     TResult Function(LocationCode locationCode)? deleteBookmark,
     required TResult orElse(),
   }) {
-    if (refreshBookmarkList != null) {
-      return refreshBookmarkList(bookmarkList);
+    if (refreshList != null) {
+      return refreshList();
     }
     return orElse();
   }
@@ -312,48 +292,167 @@ class _$RefreshBookmarkListImpl implements _RefreshBookmarkList {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Fetch value) fetch,
-    required TResult Function(_RefreshBookmarkList value) refreshBookmarkList,
+    required TResult Function(_RefreshList value) refreshList,
+    required TResult Function(_ListenBookmarkStream value) listenBookmarkStream,
     required TResult Function(_Bookmark value) bookmark,
     required TResult Function(_DeleteBookmark value) deleteBookmark,
   }) {
-    return refreshBookmarkList(this);
+    return refreshList(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_RefreshBookmarkList value)? refreshBookmarkList,
+    TResult? Function(_RefreshList value)? refreshList,
+    TResult? Function(_ListenBookmarkStream value)? listenBookmarkStream,
     TResult? Function(_Bookmark value)? bookmark,
     TResult? Function(_DeleteBookmark value)? deleteBookmark,
   }) {
-    return refreshBookmarkList?.call(this);
+    return refreshList?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Fetch value)? fetch,
-    TResult Function(_RefreshBookmarkList value)? refreshBookmarkList,
+    TResult Function(_RefreshList value)? refreshList,
+    TResult Function(_ListenBookmarkStream value)? listenBookmarkStream,
     TResult Function(_Bookmark value)? bookmark,
     TResult Function(_DeleteBookmark value)? deleteBookmark,
     required TResult orElse(),
   }) {
-    if (refreshBookmarkList != null) {
-      return refreshBookmarkList(this);
+    if (refreshList != null) {
+      return refreshList(this);
     }
     return orElse();
   }
 }
 
-abstract class _RefreshBookmarkList implements LocationFineDustEvent {
-  const factory _RefreshBookmarkList(final List<int> bookmarkList) =
-      _$RefreshBookmarkListImpl;
+abstract class _RefreshList implements LocationFineDustEvent {
+  const factory _RefreshList() = _$RefreshListImpl;
+}
 
-  List<int> get bookmarkList;
-  @JsonKey(ignore: true)
-  _$$RefreshBookmarkListImplCopyWith<_$RefreshBookmarkListImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+/// @nodoc
+abstract class _$$ListenBookmarkStreamImplCopyWith<$Res> {
+  factory _$$ListenBookmarkStreamImplCopyWith(_$ListenBookmarkStreamImpl value,
+          $Res Function(_$ListenBookmarkStreamImpl) then) =
+      __$$ListenBookmarkStreamImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ListenBookmarkStreamImplCopyWithImpl<$Res>
+    extends _$LocationFineDustEventCopyWithImpl<$Res,
+        _$ListenBookmarkStreamImpl>
+    implements _$$ListenBookmarkStreamImplCopyWith<$Res> {
+  __$$ListenBookmarkStreamImplCopyWithImpl(_$ListenBookmarkStreamImpl _value,
+      $Res Function(_$ListenBookmarkStreamImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$ListenBookmarkStreamImpl implements _ListenBookmarkStream {
+  const _$ListenBookmarkStreamImpl();
+
+  @override
+  String toString() {
+    return 'LocationFineDustEvent.listenBookmarkStream()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ListenBookmarkStreamImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() fetch,
+    required TResult Function() refreshList,
+    required TResult Function() listenBookmarkStream,
+    required TResult Function(LocationCode locationCode) bookmark,
+    required TResult Function(LocationCode locationCode) deleteBookmark,
+  }) {
+    return listenBookmarkStream();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? fetch,
+    TResult? Function()? refreshList,
+    TResult? Function()? listenBookmarkStream,
+    TResult? Function(LocationCode locationCode)? bookmark,
+    TResult? Function(LocationCode locationCode)? deleteBookmark,
+  }) {
+    return listenBookmarkStream?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? fetch,
+    TResult Function()? refreshList,
+    TResult Function()? listenBookmarkStream,
+    TResult Function(LocationCode locationCode)? bookmark,
+    TResult Function(LocationCode locationCode)? deleteBookmark,
+    required TResult orElse(),
+  }) {
+    if (listenBookmarkStream != null) {
+      return listenBookmarkStream();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_RefreshList value) refreshList,
+    required TResult Function(_ListenBookmarkStream value) listenBookmarkStream,
+    required TResult Function(_Bookmark value) bookmark,
+    required TResult Function(_DeleteBookmark value) deleteBookmark,
+  }) {
+    return listenBookmarkStream(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_RefreshList value)? refreshList,
+    TResult? Function(_ListenBookmarkStream value)? listenBookmarkStream,
+    TResult? Function(_Bookmark value)? bookmark,
+    TResult? Function(_DeleteBookmark value)? deleteBookmark,
+  }) {
+    return listenBookmarkStream?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_RefreshList value)? refreshList,
+    TResult Function(_ListenBookmarkStream value)? listenBookmarkStream,
+    TResult Function(_Bookmark value)? bookmark,
+    TResult Function(_DeleteBookmark value)? deleteBookmark,
+    required TResult orElse(),
+  }) {
+    if (listenBookmarkStream != null) {
+      return listenBookmarkStream(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ListenBookmarkStream implements LocationFineDustEvent {
+  const factory _ListenBookmarkStream() = _$ListenBookmarkStreamImpl;
 }
 
 /// @nodoc
@@ -422,7 +521,8 @@ class _$BookmarkImpl implements _Bookmark {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() fetch,
-    required TResult Function(List<int> bookmarkList) refreshBookmarkList,
+    required TResult Function() refreshList,
+    required TResult Function() listenBookmarkStream,
     required TResult Function(LocationCode locationCode) bookmark,
     required TResult Function(LocationCode locationCode) deleteBookmark,
   }) {
@@ -433,7 +533,8 @@ class _$BookmarkImpl implements _Bookmark {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? fetch,
-    TResult? Function(List<int> bookmarkList)? refreshBookmarkList,
+    TResult? Function()? refreshList,
+    TResult? Function()? listenBookmarkStream,
     TResult? Function(LocationCode locationCode)? bookmark,
     TResult? Function(LocationCode locationCode)? deleteBookmark,
   }) {
@@ -444,7 +545,8 @@ class _$BookmarkImpl implements _Bookmark {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? fetch,
-    TResult Function(List<int> bookmarkList)? refreshBookmarkList,
+    TResult Function()? refreshList,
+    TResult Function()? listenBookmarkStream,
     TResult Function(LocationCode locationCode)? bookmark,
     TResult Function(LocationCode locationCode)? deleteBookmark,
     required TResult orElse(),
@@ -459,7 +561,8 @@ class _$BookmarkImpl implements _Bookmark {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Fetch value) fetch,
-    required TResult Function(_RefreshBookmarkList value) refreshBookmarkList,
+    required TResult Function(_RefreshList value) refreshList,
+    required TResult Function(_ListenBookmarkStream value) listenBookmarkStream,
     required TResult Function(_Bookmark value) bookmark,
     required TResult Function(_DeleteBookmark value) deleteBookmark,
   }) {
@@ -470,7 +573,8 @@ class _$BookmarkImpl implements _Bookmark {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_RefreshBookmarkList value)? refreshBookmarkList,
+    TResult? Function(_RefreshList value)? refreshList,
+    TResult? Function(_ListenBookmarkStream value)? listenBookmarkStream,
     TResult? Function(_Bookmark value)? bookmark,
     TResult? Function(_DeleteBookmark value)? deleteBookmark,
   }) {
@@ -481,7 +585,8 @@ class _$BookmarkImpl implements _Bookmark {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Fetch value)? fetch,
-    TResult Function(_RefreshBookmarkList value)? refreshBookmarkList,
+    TResult Function(_RefreshList value)? refreshList,
+    TResult Function(_ListenBookmarkStream value)? listenBookmarkStream,
     TResult Function(_Bookmark value)? bookmark,
     TResult Function(_DeleteBookmark value)? deleteBookmark,
     required TResult orElse(),
@@ -569,7 +674,8 @@ class _$DeleteBookmarkImpl implements _DeleteBookmark {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() fetch,
-    required TResult Function(List<int> bookmarkList) refreshBookmarkList,
+    required TResult Function() refreshList,
+    required TResult Function() listenBookmarkStream,
     required TResult Function(LocationCode locationCode) bookmark,
     required TResult Function(LocationCode locationCode) deleteBookmark,
   }) {
@@ -580,7 +686,8 @@ class _$DeleteBookmarkImpl implements _DeleteBookmark {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? fetch,
-    TResult? Function(List<int> bookmarkList)? refreshBookmarkList,
+    TResult? Function()? refreshList,
+    TResult? Function()? listenBookmarkStream,
     TResult? Function(LocationCode locationCode)? bookmark,
     TResult? Function(LocationCode locationCode)? deleteBookmark,
   }) {
@@ -591,7 +698,8 @@ class _$DeleteBookmarkImpl implements _DeleteBookmark {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? fetch,
-    TResult Function(List<int> bookmarkList)? refreshBookmarkList,
+    TResult Function()? refreshList,
+    TResult Function()? listenBookmarkStream,
     TResult Function(LocationCode locationCode)? bookmark,
     TResult Function(LocationCode locationCode)? deleteBookmark,
     required TResult orElse(),
@@ -606,7 +714,8 @@ class _$DeleteBookmarkImpl implements _DeleteBookmark {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Fetch value) fetch,
-    required TResult Function(_RefreshBookmarkList value) refreshBookmarkList,
+    required TResult Function(_RefreshList value) refreshList,
+    required TResult Function(_ListenBookmarkStream value) listenBookmarkStream,
     required TResult Function(_Bookmark value) bookmark,
     required TResult Function(_DeleteBookmark value) deleteBookmark,
   }) {
@@ -617,7 +726,8 @@ class _$DeleteBookmarkImpl implements _DeleteBookmark {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_RefreshBookmarkList value)? refreshBookmarkList,
+    TResult? Function(_RefreshList value)? refreshList,
+    TResult? Function(_ListenBookmarkStream value)? listenBookmarkStream,
     TResult? Function(_Bookmark value)? bookmark,
     TResult? Function(_DeleteBookmark value)? deleteBookmark,
   }) {
@@ -628,7 +738,8 @@ class _$DeleteBookmarkImpl implements _DeleteBookmark {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Fetch value)? fetch,
-    TResult Function(_RefreshBookmarkList value)? refreshBookmarkList,
+    TResult Function(_RefreshList value)? refreshList,
+    TResult Function(_ListenBookmarkStream value)? listenBookmarkStream,
     TResult Function(_Bookmark value)? bookmark,
     TResult Function(_DeleteBookmark value)? deleteBookmark,
     required TResult orElse(),
@@ -653,10 +764,9 @@ abstract class _DeleteBookmark implements LocationFineDustEvent {
 /// @nodoc
 mixin _$LocationFineDustState {
   LocationFineDustStatus get status => throw _privateConstructorUsedError;
-  List<LocationFineDust>? get locationFineDustList =>
+  List<LocationFineDust> get locationFineDustList =>
       throw _privateConstructorUsedError;
-  List<LocationFineDust>? get bookmarkList =>
-      throw _privateConstructorUsedError;
+  List<int> get bookmarkLocationList => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $LocationFineDustStateCopyWith<LocationFineDustState> get copyWith =>
@@ -671,8 +781,8 @@ abstract class $LocationFineDustStateCopyWith<$Res> {
   @useResult
   $Res call(
       {LocationFineDustStatus status,
-      List<LocationFineDust>? locationFineDustList,
-      List<LocationFineDust>? bookmarkList});
+      List<LocationFineDust> locationFineDustList,
+      List<int> bookmarkLocationList});
 }
 
 /// @nodoc
@@ -690,22 +800,22 @@ class _$LocationFineDustStateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? status = null,
-    Object? locationFineDustList = freezed,
-    Object? bookmarkList = freezed,
+    Object? locationFineDustList = null,
+    Object? bookmarkLocationList = null,
   }) {
     return _then(_value.copyWith(
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as LocationFineDustStatus,
-      locationFineDustList: freezed == locationFineDustList
+      locationFineDustList: null == locationFineDustList
           ? _value.locationFineDustList
           : locationFineDustList // ignore: cast_nullable_to_non_nullable
-              as List<LocationFineDust>?,
-      bookmarkList: freezed == bookmarkList
-          ? _value.bookmarkList
-          : bookmarkList // ignore: cast_nullable_to_non_nullable
-              as List<LocationFineDust>?,
+              as List<LocationFineDust>,
+      bookmarkLocationList: null == bookmarkLocationList
+          ? _value.bookmarkLocationList
+          : bookmarkLocationList // ignore: cast_nullable_to_non_nullable
+              as List<int>,
     ) as $Val);
   }
 }
@@ -721,8 +831,8 @@ abstract class _$$LocationFineDustStateImplCopyWith<$Res>
   @useResult
   $Res call(
       {LocationFineDustStatus status,
-      List<LocationFineDust>? locationFineDustList,
-      List<LocationFineDust>? bookmarkList});
+      List<LocationFineDust> locationFineDustList,
+      List<int> bookmarkLocationList});
 }
 
 /// @nodoc
@@ -738,22 +848,22 @@ class __$$LocationFineDustStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? status = null,
-    Object? locationFineDustList = freezed,
-    Object? bookmarkList = freezed,
+    Object? locationFineDustList = null,
+    Object? bookmarkLocationList = null,
   }) {
     return _then(_$LocationFineDustStateImpl(
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as LocationFineDustStatus,
-      locationFineDustList: freezed == locationFineDustList
+      locationFineDustList: null == locationFineDustList
           ? _value._locationFineDustList
           : locationFineDustList // ignore: cast_nullable_to_non_nullable
-              as List<LocationFineDust>?,
-      bookmarkList: freezed == bookmarkList
-          ? _value._bookmarkList
-          : bookmarkList // ignore: cast_nullable_to_non_nullable
-              as List<LocationFineDust>?,
+              as List<LocationFineDust>,
+      bookmarkLocationList: null == bookmarkLocationList
+          ? _value._bookmarkLocationList
+          : bookmarkLocationList // ignore: cast_nullable_to_non_nullable
+              as List<int>,
     ));
   }
 }
@@ -763,37 +873,36 @@ class __$$LocationFineDustStateImplCopyWithImpl<$Res>
 class _$LocationFineDustStateImpl implements _LocationFineDustState {
   _$LocationFineDustStateImpl(
       {required this.status,
-      final List<LocationFineDust>? locationFineDustList,
-      final List<LocationFineDust>? bookmarkList})
+      final List<LocationFineDust> locationFineDustList = const [],
+      final List<int> bookmarkLocationList = const []})
       : _locationFineDustList = locationFineDustList,
-        _bookmarkList = bookmarkList;
+        _bookmarkLocationList = bookmarkLocationList;
 
   @override
   final LocationFineDustStatus status;
-  final List<LocationFineDust>? _locationFineDustList;
+  final List<LocationFineDust> _locationFineDustList;
   @override
-  List<LocationFineDust>? get locationFineDustList {
-    final value = _locationFineDustList;
-    if (value == null) return null;
+  @JsonKey()
+  List<LocationFineDust> get locationFineDustList {
     if (_locationFineDustList is EqualUnmodifiableListView)
       return _locationFineDustList;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_locationFineDustList);
   }
 
-  final List<LocationFineDust>? _bookmarkList;
+  final List<int> _bookmarkLocationList;
   @override
-  List<LocationFineDust>? get bookmarkList {
-    final value = _bookmarkList;
-    if (value == null) return null;
-    if (_bookmarkList is EqualUnmodifiableListView) return _bookmarkList;
+  @JsonKey()
+  List<int> get bookmarkLocationList {
+    if (_bookmarkLocationList is EqualUnmodifiableListView)
+      return _bookmarkLocationList;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_bookmarkLocationList);
   }
 
   @override
   String toString() {
-    return 'LocationFineDustState(status: $status, locationFineDustList: $locationFineDustList, bookmarkList: $bookmarkList)';
+    return 'LocationFineDustState(status: $status, locationFineDustList: $locationFineDustList, bookmarkLocationList: $bookmarkLocationList)';
   }
 
   @override
@@ -805,7 +914,7 @@ class _$LocationFineDustStateImpl implements _LocationFineDustState {
             const DeepCollectionEquality()
                 .equals(other._locationFineDustList, _locationFineDustList) &&
             const DeepCollectionEquality()
-                .equals(other._bookmarkList, _bookmarkList));
+                .equals(other._bookmarkLocationList, _bookmarkLocationList));
   }
 
   @override
@@ -813,7 +922,7 @@ class _$LocationFineDustStateImpl implements _LocationFineDustState {
       runtimeType,
       status,
       const DeepCollectionEquality().hash(_locationFineDustList),
-      const DeepCollectionEquality().hash(_bookmarkList));
+      const DeepCollectionEquality().hash(_bookmarkLocationList));
 
   @JsonKey(ignore: true)
   @override
@@ -825,17 +934,16 @@ class _$LocationFineDustStateImpl implements _LocationFineDustState {
 
 abstract class _LocationFineDustState implements LocationFineDustState {
   factory _LocationFineDustState(
-          {required final LocationFineDustStatus status,
-          final List<LocationFineDust>? locationFineDustList,
-          final List<LocationFineDust>? bookmarkList}) =
-      _$LocationFineDustStateImpl;
+      {required final LocationFineDustStatus status,
+      final List<LocationFineDust> locationFineDustList,
+      final List<int> bookmarkLocationList}) = _$LocationFineDustStateImpl;
 
   @override
   LocationFineDustStatus get status;
   @override
-  List<LocationFineDust>? get locationFineDustList;
+  List<LocationFineDust> get locationFineDustList;
   @override
-  List<LocationFineDust>? get bookmarkList;
+  List<int> get bookmarkLocationList;
   @override
   @JsonKey(ignore: true)
   _$$LocationFineDustStateImplCopyWith<_$LocationFineDustStateImpl>
