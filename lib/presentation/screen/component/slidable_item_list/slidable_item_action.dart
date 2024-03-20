@@ -13,12 +13,8 @@ class SlidableItemAction<T> {
     required this.icon,
     required this.callback,
   });
-}
 
-typedef SlidableActionCallback<T> = void Function(T item);
-
-extension SlidableItemActionExtension on SlidableItemAction {
-  SlidableAction to<T>(T item) {
+  SlidableAction to(T item) {
     return SlidableAction(
       onPressed: (_) => callback(item),
       backgroundColor: backgroundColor,
@@ -27,3 +23,5 @@ extension SlidableItemActionExtension on SlidableItemAction {
     );
   }
 }
+
+typedef SlidableActionCallback<T> = void Function(T item);
