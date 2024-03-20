@@ -5,7 +5,7 @@ part 'slidable_item_action.dart';
 
 const _defaultActionSize = 5;
 
-class SlidableItemList<T> extends StatefulWidget {
+class SlidableItemList<T> extends StatelessWidget {
   final List<T> list;
   final ItemClickCallback<T> itemClickCallback;
   final RefreshCallback refreshCallback;
@@ -24,54 +24,32 @@ class SlidableItemList<T> extends StatefulWidget {
   });
 
   @override
-  State<SlidableItemList<T>> createState() => _SlidableItemListState<T>();
-}
-
-class _SlidableItemListState<T> extends State<SlidableItemList<T>>
-    with SingleTickerProviderStateMixin {
-  late final controller = SlidableController(this);
-
-  @override
-  void initState() {
-    super.initState();
-    controller.enableStartActionPane =
-        widget.startActionList?.isNotEmpty ?? false;
-    controller.enableEndActionPane = widget.endActionList?.isNotEmpty ?? false;
-  }
-
-  @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
-      onRefresh: widget.refreshCallback,
+      onRefresh: refreshCallback,
       child: ListView.builder(
         itemBuilder: (context, index) {
           return InkWell(
             onTap: () {
-              widget.itemClickCallback(widget.list[index]);
+              itemClickCallback(list[index]);
             },
             child: Slidable(
               startActionPane: getActionPane(
-                actionList: widget.startActionList,
-                item: widget.list[index],
+                actionList: startActionList,
+                item: list[index],
               ),
               endActionPane: getActionPane(
-                actionList: widget.endActionList,
-                item: widget.list[index],
+                actionList: endActionList,
+                item: list[index],
               ),
               useTextDirection: false,
-              child: widget.itemBuilder(context, widget.list[index]),
+              child: itemBuilder(context, list[index]),
             ),
           );
         },
-        itemCount: widget.list.length,
+        itemCount: list.length,
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
   }
 
   ActionPane? getActionPane({
