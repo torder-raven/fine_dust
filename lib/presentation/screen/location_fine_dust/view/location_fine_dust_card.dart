@@ -6,8 +6,13 @@ import 'package:flutter/material.dart';
 
 class LocationFineDustCard extends StatelessWidget {
   final LocationFineDust locationFineDust;
+  final bool isBookmark;
 
-  const LocationFineDustCard({super.key, required this.locationFineDust});
+  const LocationFineDustCard({
+    super.key,
+    required this.locationFineDust,
+    required this.isBookmark,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +22,7 @@ class LocationFineDustCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           _LeftInfo(
+            isBookmark: isBookmark,
             location: locationFineDust.locationCode.locationName,
             dateTime: locationFineDust.fineDust.dateTime,
           ),
@@ -32,11 +38,13 @@ class LocationFineDustCard extends StatelessWidget {
 }
 
 class _LeftInfo extends StatelessWidget {
+  final bool isBookmark;
   final String location;
   final DateTime dateTime;
 
   const _LeftInfo({
     super.key,
+    required this.isBookmark,
     required this.location,
     required this.dateTime,
   });
@@ -46,12 +54,21 @@ class _LeftInfo extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          location,
-          style: Theme.of(context)
-              .textTheme
-              .headlineMedium
-              ?.copyWith(color: Colors.white, fontWeight: FontWeight.w800),
+        Row(
+          children: [
+            Text(
+              location,
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineMedium
+                  ?.copyWith(color: Colors.white, fontWeight: FontWeight.w800),
+            ),
+            if (isBookmark)
+            const Icon(
+              Icons.star,
+              color: Colors.yellow,
+            )
+          ],
         ),
         Text(
           dateTime.toTimeString(),

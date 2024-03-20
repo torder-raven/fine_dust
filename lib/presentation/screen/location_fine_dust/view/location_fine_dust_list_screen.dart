@@ -17,6 +17,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/location_fine_dust_bloc.dart';
 
+part 'location_fine_dust_list.dart';
+
 class LocationFineDustListScreen extends StatefulWidget {
   const LocationFineDustListScreen({super.key});
 
@@ -64,28 +66,8 @@ class _LocationFineDustListScreenState
                     ),
                     child: Stack(
                       children: [
-                        body(
-                          bookmarkList: state.bookmarkList ?? [],
-                          locationFineDustList2:
-                              state.locationFineDustList ?? [],
-                          refreshCallback: () async {
-                            context
-                                .read<LocationFineDustBloc>()
-                                .add(const LocationFineDustEvent.fetch());
-                          },
-                          itemClickCallback: (locationFineDust) {
-                            goToDetailScreen(locationFineDust.locationCode);
-                          },
-                          bookmarkCallback: (locationFineDust) {
-                            context.read<LocationFineDustBloc>().add(
-                                LocationFineDustEvent.bookmark(
-                                    locationFineDust.locationCode));
-                          },
-                          deleteBookmarkCallback: (locationFineDust) {
-                            context.read<LocationFineDustBloc>().add(
-                                LocationFineDustEvent.deleteBookmark(
-                                    locationFineDust.locationCode));
-                          },
+                        LocationFineDustList(
+                          state: state,
                         ),
                         if (state.status == LocationFineDustStatus.loading)
                           const Loading(),
@@ -107,122 +89,18 @@ class _LocationFineDustListScreenState
       getLocalFineDustInfoListUsecase: GetLocalFineDustInfoListUsecase(
         repository: context.read<FineDustRepository>(),
       ),
-      bookmarkLocationUsecase:
-          BookmarkLocationUsecase(repository: bookmarkRepository),
-      deleteBookmarkUsecase:
-          DeleteBookmarkUsecase(repository: bookmarkRepository),
-      getBookmarkListUsecase:
-          GetBookmarkListUsecase(repository: bookmarkRepository),
+      bookmarkLocationUsecase: BookmarkLocationUsecase(
+        repository: bookmarkRepository,
+      ),
+      deleteBookmarkUsecase: DeleteBookmarkUsecase(
+        repository: bookmarkRepository,
+      ),
+      getBookmarkListUsecase: GetBookmarkListUsecase(
+        repository: bookmarkRepository,
+      ),
     );
 
     return locationFineDustBloc;
-  }
-
-  Widget body({
-    required List<LocationFineDust> bookmarkList,
-    required List<LocationFineDust> locationFineDustList2,
-    required RefreshCallback refreshCallback,
-    required LocationFineDustCallback itemClickCallback,
-    required SlidableActionCallback bookmarkCallback,
-    required SlidableActionCallback deleteBookmarkCallback,
-  }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        if (bookmarkList.isNotEmpty)
-          ...bookmarkListViews(
-            bookmarkList: bookmarkList,
-            refreshCallback: refreshCallback,
-            itemClickCallback: itemClickCallback,
-            deleteBookmarkCallback: deleteBookmarkCallback,
-          ),
-        locationFineDustTitle(Strings.LOCATION_FINE_DUST_TITLE),
-        locationFineDustList(
-          list: locationFineDustList2,
-          refreshCallback: refreshCallback,
-          itemClickCallback: itemClickCallback,
-          startActionList: [
-            SlidableItemAction<LocationFineDust>(
-              backgroundColor: ColorResource.PRIMARY_COLOR,
-              foregroundColor: Colors.yellow,
-              icon: Icons.star_border_outlined,
-              callback: bookmarkCallback,
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
-  List<Widget> bookmarkListViews({
-    required List<LocationFineDust> bookmarkList,
-    required RefreshCallback refreshCallback,
-    required LocationFineDustCallback itemClickCallback,
-    required SlidableActionCallback deleteBookmarkCallback,
-  }) {
-    return [
-      locationFineDustTitle(Strings.BOOKMARK_TITLE),
-      locationFineDustList(
-        list: bookmarkList,
-        refreshCallback: refreshCallback,
-        itemClickCallback: itemClickCallback,
-        startActionList: [
-          SlidableItemAction<LocationFineDust>(
-            backgroundColor: ColorResource.PRIMARY_COLOR,
-            foregroundColor: Colors.yellow,
-            icon: Icons.star,
-            callback: deleteBookmarkCallback,
-          ),
-        ],
-      ),
-    ];
-  }
-
-  Widget locationFineDustTitle(String title) {
-    return Container(
-      color: Theme.of(context).primaryColor,
-      padding: const EdgeInsets.all(8.0),
-      child: Text(
-        title,
-        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-              color: Colors.white,
-              fontWeight: FontWeight.w800,
-            ),
-      ),
-    );
-  }
-
-  Widget locationFineDustList({
-    required List<LocationFineDust> list,
-    required RefreshCallback refreshCallback,
-    required LocationFineDustCallback itemClickCallback,
-    required List<SlidableItemAction<LocationFineDust>> startActionList,
-  }) {
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SlidableItemList<LocationFineDust>(
-          list: list,
-          itemClickCallback: itemClickCallback,
-          refreshCallback: refreshCallback,
-          startActionList: startActionList,
-          itemBuilder: <LocationFineDust>(context, locationFineDust) {
-            return LocationFineDustCard(locationFineDust: locationFineDust);
-          },
-        ),
-      ),
-    );
-  }
-
-  void goToDetailScreen(LocationCode locationCode) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) {
-          return DetailScreen(locationCode: locationCode);
-        },
-      ),
-    );
   }
 
   void showErrorSnackBar(BuildContext context) {
