@@ -49,8 +49,7 @@ class LocationFineDustBloc
       emit(state.copyWith(locationFineDustList: locationFineDustList));
       add(const _RefreshList());
     } catch (e) {
-      emit(state.copyWith(
-          status: LocationFineDustStatus.failure, locationFineDustList: []));
+      emit(state.copyWith(status: LocationFineDustStatus.failure));
     }
   }
 
