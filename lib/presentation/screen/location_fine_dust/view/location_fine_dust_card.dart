@@ -1,5 +1,6 @@
 import 'package:fine_dust/domain/entity/dust_info.dart';
 import 'package:fine_dust/domain/entity/location_fine_dust.dart';
+import 'package:fine_dust/presentation/constant/colors.dart';
 import 'package:fine_dust/presentation/constant/strings.dart';
 import 'package:fine_dust/presentation/extension.dart';
 import 'package:flutter/material.dart';
@@ -16,8 +17,12 @@ class LocationFineDustCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+    return Container(
+      decoration: BoxDecoration(
+        color: ColorResource.ITEM_BACKGROUND_COLOR,
+        borderRadius: BorderRadius.circular(16.0),
+      ),
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -64,10 +69,13 @@ class _LeftInfo extends StatelessWidget {
                   ?.copyWith(color: Colors.white, fontWeight: FontWeight.w800),
             ),
             if (isBookmark)
-            const Icon(
-              Icons.star,
-              color: Colors.yellow,
-            )
+              const Padding(
+                padding: EdgeInsets.only(left: 4.0),
+                child: Icon(
+                  Icons.star,
+                  color: Colors.yellow,
+                ),
+              )
           ],
         ),
         Text(

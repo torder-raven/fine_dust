@@ -10,40 +10,43 @@ class LocationFineDustList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SlidableItemList<LocationFineDust>(
-      list: state.locationFineDustList,
-      refreshCallback: () async {
-        context
-            .read<LocationFineDustBloc>()
-            .add(const LocationFineDustEvent.fetch());
-      },
-      itemClickCallback: (locationFineDust) {
-        goToDetailScreen(context, locationFineDust.locationCode);
-      },
-      startActionList: [
-        SlidableItemAction<LocationFineDust>(
-          backgroundColor: ColorResource.PRIMARY_COLOR,
-          foregroundColor: Colors.yellow,
-          icon: Icons.star,
-          callback: (LocationFineDust locationFineDust) {
-            if (isBookmark(locationFineDust)) {
-              context.read<LocationFineDustBloc>().add(
-                  LocationFineDustEvent.deleteBookmark(
-                      locationFineDust.locationCode));
-            } else {
-              context.read<LocationFineDustBloc>().add(
-                  LocationFineDustEvent.bookmark(
-                      locationFineDust.locationCode));
-            }
-          },
-        ),
-      ],
-      itemBuilder: <LocationFineDust>(context, locationFineDust) {
-        return LocationFineDustCard(
-          locationFineDust: locationFineDust,
-          isBookmark: isBookmark(locationFineDust),
-        );
-      },
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: SlidableItemList<LocationFineDust>(
+        list: state.locationFineDustList,
+        refreshCallback: () async {
+          context
+              .read<LocationFineDustBloc>()
+              .add(const LocationFineDustEvent.fetch());
+        },
+        itemClickCallback: (locationFineDust) {
+          goToDetailScreen(context, locationFineDust.locationCode);
+        },
+        startActionList: [
+          SlidableItemAction<LocationFineDust>(
+            backgroundColor: ColorResource.PRIMARY_COLOR,
+            foregroundColor: Colors.yellow,
+            icon: Icons.star,
+            callback: (LocationFineDust locationFineDust) {
+              if (isBookmark(locationFineDust)) {
+                context.read<LocationFineDustBloc>().add(
+                    LocationFineDustEvent.deleteBookmark(
+                        locationFineDust.locationCode));
+              } else {
+                context.read<LocationFineDustBloc>().add(
+                    LocationFineDustEvent.bookmark(
+                        locationFineDust.locationCode));
+              }
+            },
+          ),
+        ],
+        itemBuilder: <LocationFineDust>(context, locationFineDust) {
+          return LocationFineDustCard(
+            locationFineDust: locationFineDust,
+            isBookmark: isBookmark(locationFineDust),
+          );
+        },
+      ),
     );
   }
 

@@ -27,7 +27,7 @@ class SlidableItemList<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     return RefreshIndicator(
       onRefresh: refreshCallback,
-      child: ListView.builder(
+      child: ListView.separated(
         itemBuilder: (context, index) {
           return InkWell(
             onTap: () {
@@ -48,6 +48,11 @@ class SlidableItemList<T> extends StatelessWidget {
           );
         },
         itemCount: list.length,
+        separatorBuilder: (BuildContext context, int index) {
+          return const SizedBox(
+            height: 8.0,
+          );
+        },
       ),
     );
   }

@@ -10,7 +10,7 @@ class Loading extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(30),
         decoration: BoxDecoration(
-          color: Colors.blue,
+          color: ColorResource.ITEM_BACKGROUND_COLOR,
           borderRadius: BorderRadius.circular(16.0),
           boxShadow: [
             BoxShadow(
@@ -22,7 +22,7 @@ class Loading extends StatelessWidget {
           ],
         ),
         child: const CircularProgressIndicator(
-          color: ColorResource.BACKGROUND_COLOR,
+          color: ColorResource.PRIMARY_COLOR,
         ),
       ),
     );
