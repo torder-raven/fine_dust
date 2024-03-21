@@ -32,7 +32,9 @@ class _AirQualityLevelBarState extends State<AirQualityLevelBar> {
       double width = _globalKey.currentContext?.size?.width ?? 0.0;
       setState(() {
         currentLevelPosition = ((width / widget.levelMaxValue) *
-            (widget.rawValue > widget.levelMaxValue ? widget.levelMaxValue : widget.rawValue)
+            (widget.rawValue > widget.levelMaxValue
+                    ? widget.levelMaxValue
+                    : widget.rawValue)
                 .toDouble());
       });
     });
@@ -59,12 +61,14 @@ class _AirQualityLevelBarState extends State<AirQualityLevelBar> {
             ),
           ),
         ),
-        Positioned(
+        AnimatedPositioned(
+          curve: Curves.ease,
           left: (currentLevelPosition > 0
               ? currentLevelPosition - currentLevelViewWidth
               : 0),
           top: 0,
           bottom: 0,
+          duration: Duration(milliseconds: 750),
           child: Container(
             width: currentLevelViewWidth,
             decoration: BoxDecoration(

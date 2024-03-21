@@ -1,5 +1,5 @@
 import 'package:fine_dust/data/remote/entity/response/real_time_avg_list_distinct_by_city_response.dart';
-import 'package:fine_dust/domain/entity/air_quailty_type.dart';
+import 'package:fine_dust/domain/entity/air_quality_type.dart';
 import 'package:fine_dust/domain/entity/dust_info.dart';
 
 import '../../../../domain/entity/air_quality_status.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-import '../../../../domain/entity/air_quailty_type.dart';
+import '../../../../domain/entity/air_quality_type.dart';
 import '../../../../presentation/util/env_keys.dart';
 
 class RealTimeAvgListDistinctByCityRequest {

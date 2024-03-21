@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class DetailCardView extends StatelessWidget {
+class AirQualityDetailCardView extends StatelessWidget {
   final String title;
   final Widget child;
   final Function()? onTap;
 
-  const DetailCardView({
+  const AirQualityDetailCardView({
     required this.title,
     required this.child,
     this.onTap,
