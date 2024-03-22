@@ -23,23 +23,20 @@ class LocationFineDustBloc
     required this.deleteBookmarkUsecase,
     required this.getBookmarkListUsecase,
   }) : super(LocationFineDustState(status: LocationFineDustStatus.initial)) {
-    bookmarkListStreamSubscription =
-        getBookmarkListUsecase.call().listen((bookmarkList) {
-      add(_RefreshBookmarkList(bookmarkList));
-    });
-
     on<_Fetch>(_fetch);
+    on<_ListenBookmarkStream>(_listenBookmarkStream);
+    on<_RefreshList>(_refreshList);
     on<_Bookmark>(_bookmark);
     on<_DeleteBookmark>(_deleteBookmark);
-    on<_RefreshBookmarkList>(_refreshBookmarkList);
+
+    add(const _ListenBookmarkStream());
+    add(const _Fetch());
   }
 
   final GetLocalFineDustInfoListUsecase getLocalFineDustInfoListUsecase;
   final BookmarkLocationUsecase bookmarkLocationUsecase;
   final DeleteBookmarkUsecase deleteBookmarkUsecase;
   final GetBookmarkListUsecase getBookmarkListUsecase;
-
-  late StreamSubscription<List<int>> bookmarkListStreamSubscription;
 
   Future<void> _fetch(
     _Fetch event,
@@ -48,47 +45,71 @@ class LocationFineDustBloc
     emit(state.copyWith(status: LocationFineDustStatus.loading));
 
     try {
-      final locationFineDustList = await getLocalFineDustInfoListUsecase.call();
-
-      emit(state.copyWith(
-        status: LocationFineDustStatus.success,
-        locationFineDustList: locationFineDustList,
-      ));
+      final locationFineDustList = await getLocalFineDustInfoListUsecase();
+      emit(state.copyWith(locationFineDustList: locationFineDustList));
+      add(const _RefreshList());
     } catch (e) {
-      emit(state.copyWith(
-          status: LocationFineDustStatus.failure, locationFineDustList: []));
+      emit(state.copyWith(status: LocationFineDustStatus.failure));
     }
   }
 
-  Future<void> _refreshBookmarkList(
-    _RefreshBookmarkList event,
+  Future<void> _listenBookmarkStream(
+      _ListenBookmarkStream event, Emitter<LocationFineDustState> emit) async {
+    await emit.onEach(
+      getBookmarkListUsecase(),
+      onData: (list) {
+        emit(state.copyWith(bookmarkLocationList: list));
+        if (state.status != LocationFineDustStatus.loading) {
+          add(const _RefreshList());
+        }
+      },
+    );
+  }
+
+  Future<void> _refreshList(
+    _RefreshList event,
     Emitter<LocationFineDustState> emit,
   ) async {
-    final bookmarkedList = state.locationFineDustList
-        ?.where(
-            (element) => event.bookmarkList.contains(element.locationCode.code))
+    final list = state.locationFineDustList;
+    final bookmarkLocationList = state.bookmarkLocationList;
+
+    if (list.isEmpty || bookmarkLocationList.isEmpty) {
+      emit(state.copyWith(
+        status: LocationFineDustStatus.success,
+        sortedList: list,
+      ));
+      return;
+    }
+
+    final List<LocationFineDust> bookmarkList = bookmarkLocationList
+        .map((bookmarkLocation) => list.firstWhere(
+            (element) => element.locationCode.code == bookmarkLocation))
         .toList();
 
-    emit(state.copyWith(bookmarkList: bookmarkedList));
+    final List<LocationFineDust> sortedList = [...bookmarkList];
+
+    for (LocationFineDust locationFineDust in list) {
+      if (bookmarkList.contains(locationFineDust)) continue;
+      sortedList.add(locationFineDust);
+    }
+
+    emit(state.copyWith(
+      status: LocationFineDustStatus.success,
+      sortedList: sortedList,
+    ));
   }
 
   Future<void> _bookmark(
     _Bookmark event,
     Emitter<LocationFineDustState> emit,
   ) async {
-    await bookmarkLocationUsecase.call(locationCode: event.locationCode);
+    await bookmarkLocationUsecase(locationCode: event.locationCode);
   }
 
   Future<void> _deleteBookmark(
     _DeleteBookmark event,
     Emitter<LocationFineDustState> emit,
   ) async {
-    await deleteBookmarkUsecase.call(locationCode: event.locationCode);
-  }
-
-  @override
-  Future<void> close() {
-    bookmarkListStreamSubscription.cancel();
-    return super.close();
+    await deleteBookmarkUsecase(locationCode: event.locationCode);
   }
 }

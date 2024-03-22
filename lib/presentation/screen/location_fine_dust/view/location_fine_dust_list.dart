@@ -1,101 +1,68 @@
-import 'package:fine_dust/domain/entity/location_code.dart';
-import 'package:fine_dust/domain/entity/location_fine_dust.dart';
-import 'package:fine_dust/presentation/constant/colors.dart';
-import 'package:fine_dust/presentation/constant/strings.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
-
-import 'location_fine_dust_card.dart';
+part of 'location_fine_dust_list_screen.dart';
 
 class LocationFineDustList extends StatelessWidget {
-  final List<LocationFineDust> list;
-  final RefreshCallback refreshCallback;
-  final ItemTapCallback itemTapCallback;
-  final bool canBookmark;
-  final BookmarkCallback? bookmarkCallback;
-  final BookmarkCallback deleteBookmarkCallback;
+  final LocationFineDustState state;
 
   const LocationFineDustList({
     super.key,
-    required this.list,
-    required this.refreshCallback,
-    required this.itemTapCallback,
-    this.canBookmark = false,
-    this.bookmarkCallback,
-    required this.deleteBookmarkCallback,
+    required this.state,
   });
 
   @override
   Widget build(BuildContext context) {
-    if (list.isEmpty) {
-      return emptyListView(context);
-    }
-
-    return RefreshIndicator(
-      onRefresh: refreshCallback,
-      child: ListView.separated(
-        itemBuilder: (context, index) {
-          return InkWell(
-            onTap: () {
-              itemTapCallback(list[index].locationCode);
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: SlidableItemList<LocationFineDust>(
+        list: state.sortedList,
+        refreshCallback: () async {
+          context
+              .read<LocationFineDustBloc>()
+              .add(const LocationFineDustEvent.fetch());
+        },
+        itemClickCallback: (locationFineDust) {
+          goToDetailScreen(context, locationFineDust.locationCode);
+        },
+        startActionList: [
+          SlidableItemAction<LocationFineDust>(
+            backgroundColor: ColorResource.PRIMARY_COLOR,
+            foregroundColor: Colors.yellow,
+            icon: Icons.star,
+            callback: (LocationFineDust locationFineDust) {
+              if (isBookmark(locationFineDust)) {
+                context.read<LocationFineDustBloc>().add(
+                    LocationFineDustEvent.deleteBookmark(
+                        locationFineDust.locationCode));
+              } else {
+                context.read<LocationFineDustBloc>().add(
+                    LocationFineDustEvent.bookmark(
+                        locationFineDust.locationCode));
+              }
             },
-            child: Slidable(
-              endActionPane: ActionPane(
-                motion: const BehindMotion(),
-                children: [
-                  if (canBookmark)
-                    SlidableAction(
-                      onPressed: (BuildContext context) {
-                        bookmarkCallback?.call(list[index].locationCode);
-                      },
-                      backgroundColor: ColorResource.BACKGROUND_COLOR!,
-                      foregroundColor: Colors.white,
-                      icon: Icons.bookmark_add,
-                    ),
-                  SlidableAction(
-                    onPressed: (BuildContext context) {
-                      deleteBookmarkCallback(list[index].locationCode);
-                    },
-                    backgroundColor: Colors.red,
-                    foregroundColor: Colors.white,
-                    icon: Icons.bookmark_remove,
-                  ),
-                ],
-              ),
-              child: LocationFineDustCard(locationFineDust: list[index]),
-            ),
+          ),
+        ],
+        itemBuilder: <LocationFineDust>(context, locationFineDust) {
+          return LocationFineDustCard(
+            locationFineDust: locationFineDust,
+            isBookmark: isBookmark(locationFineDust),
           );
         },
-        separatorBuilder: (context, index) {
-          return const SizedBox(
-            height: 4.0,
-          );
-        },
-        itemCount: list.length,
       ),
     );
   }
 
-  Widget emptyListView(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text(Strings.LOCATION_FINE_INFO_IS_EMPTY),
-          const SizedBox(height: 16.0),
-          CircleAvatar(
-            backgroundColor: Theme.of(context).primaryColor,
-            child: IconButton(
-              color: Colors.white,
-              onPressed: refreshCallback,
-              icon: const Icon(Icons.refresh),
-            ),
-          )
-        ],
+  bool isBookmark(LocationFineDust locationFineDust) {
+    return state.bookmarkLocationList
+        .contains(locationFineDust.locationCode.code);
+  }
+
+  void goToDetailScreen(BuildContext context, LocationCode locationCode) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+          return DetailScreen(locationCode: locationCode);
+        },
       ),
     );
   }
 }
-
-typedef ItemTapCallback = void Function(LocationCode locationCode);
-typedef BookmarkCallback = void Function(LocationCode locationCode);

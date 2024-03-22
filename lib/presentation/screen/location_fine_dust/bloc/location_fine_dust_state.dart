@@ -4,8 +4,9 @@ part of 'location_fine_dust_bloc.dart';
 class LocationFineDustState with _$LocationFineDustState {
   factory LocationFineDustState({
     required LocationFineDustStatus status,
-    List<LocationFineDust>? locationFineDustList,
-    List<LocationFineDust>? bookmarkList,
+    @Default([]) List<LocationFineDust> sortedList,
+    @Default([]) List<LocationFineDust> locationFineDustList,
+    @Default([]) List<int> bookmarkLocationList,
   }) = _LocationFineDustState;
 }
 

@@ -1,50 +1,55 @@
 import 'package:fine_dust/domain/entity/dust_info.dart';
 import 'package:fine_dust/domain/entity/location_fine_dust.dart';
+import 'package:fine_dust/presentation/constant/colors.dart';
 import 'package:fine_dust/presentation/constant/strings.dart';
 import 'package:fine_dust/presentation/extension.dart';
 import 'package:flutter/material.dart';
 
 class LocationFineDustCard extends StatelessWidget {
   final LocationFineDust locationFineDust;
+  final bool isBookmark;
 
-  const LocationFineDustCard({super.key, required this.locationFineDust});
+  const LocationFineDustCard({
+    super.key,
+    required this.locationFineDust,
+    required this.isBookmark,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(
-          color: Theme.of(context).primaryColor,
-        ),
+        color: ColorResource.ITEM_BACKGROUND_COLOR,
         borderRadius: BorderRadius.circular(16.0),
       ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            _LeftInfo(
-              location: locationFineDust.locationCode.locationName,
-              dateTime: locationFineDust.fineDust.dateTime,
-            ),
-            _RightInfo(
-              fineDust: locationFineDust.fineDust,
-              ultraFineDust: locationFineDust.ultraFineDust,
-              ozone: locationFineDust.ozone,
-            ),
-          ],
-        ),
+      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          _LeftInfo(
+            isBookmark: isBookmark,
+            location: locationFineDust.locationCode.locationName,
+            dateTime: locationFineDust.fineDust.dateTime,
+          ),
+          _RightInfo(
+            fineDust: locationFineDust.fineDust,
+            ultraFineDust: locationFineDust.ultraFineDust,
+            ozone: locationFineDust.ozone,
+          ),
+        ],
       ),
     );
   }
 }
 
 class _LeftInfo extends StatelessWidget {
+  final bool isBookmark;
   final String location;
   final DateTime dateTime;
 
   const _LeftInfo({
     super.key,
+    required this.isBookmark,
     required this.location,
     required this.dateTime,
   });
@@ -54,15 +59,32 @@ class _LeftInfo extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Row(
+          children: [
+            Text(
+              location,
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineLarge
+                  ?.copyWith(color: Colors.white, fontWeight: FontWeight.w800),
+            ),
+            if (isBookmark)
+              const Padding(
+                padding: EdgeInsets.only(left: 4.0),
+                child: Icon(
+                  Icons.star,
+                  color: Colors.yellow,
+                ),
+              )
+          ],
+        ),
         Text(
-          location,
+          dateTime.toTimeString(),
           style: Theme.of(context)
               .textTheme
-              .headlineMedium
-              ?.copyWith(fontWeight: FontWeight.w800),
+              .labelMedium
+              ?.copyWith(color: Colors.white),
         ),
-        Text(dateTime.toTimeString(),
-            style: Theme.of(context).textTheme.labelMedium),
       ],
     );
   }
@@ -120,16 +142,17 @@ class _RightInfo extends StatelessWidget {
           child: Text(
             title,
             style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                  color: Colors.white,
                   fontWeight: FontWeight.w800,
                 ),
             textAlign: TextAlign.end,
           ),
         ),
         const SizedBox(width: 8.0),
-        Text(
-          dustInfo.toStateAndUnit(unit),
-          style: Theme.of(context).textTheme.labelMedium,
-        ),
+        Text(dustInfo.toStateAndUnit(unit),
+            style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                  color: Colors.white,
+                )),
       ],
     );
   }
