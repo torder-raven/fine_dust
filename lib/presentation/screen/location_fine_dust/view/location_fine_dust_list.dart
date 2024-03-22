@@ -13,7 +13,7 @@ class LocationFineDustList extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: SlidableItemList<LocationFineDust>(
-        list: state.locationFineDustList,
+        list: state.sortedList,
         refreshCallback: () async {
           context
               .read<LocationFineDustBloc>()

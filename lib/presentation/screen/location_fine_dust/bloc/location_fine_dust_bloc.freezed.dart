@@ -764,6 +764,7 @@ abstract class _DeleteBookmark implements LocationFineDustEvent {
 /// @nodoc
 mixin _$LocationFineDustState {
   LocationFineDustStatus get status => throw _privateConstructorUsedError;
+  List<LocationFineDust> get sortedList => throw _privateConstructorUsedError;
   List<LocationFineDust> get locationFineDustList =>
       throw _privateConstructorUsedError;
   List<int> get bookmarkLocationList => throw _privateConstructorUsedError;
@@ -781,6 +782,7 @@ abstract class $LocationFineDustStateCopyWith<$Res> {
   @useResult
   $Res call(
       {LocationFineDustStatus status,
+      List<LocationFineDust> sortedList,
       List<LocationFineDust> locationFineDustList,
       List<int> bookmarkLocationList});
 }
@@ -800,6 +802,7 @@ class _$LocationFineDustStateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? status = null,
+    Object? sortedList = null,
     Object? locationFineDustList = null,
     Object? bookmarkLocationList = null,
   }) {
@@ -808,6 +811,10 @@ class _$LocationFineDustStateCopyWithImpl<$Res,
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as LocationFineDustStatus,
+      sortedList: null == sortedList
+          ? _value.sortedList
+          : sortedList // ignore: cast_nullable_to_non_nullable
+              as List<LocationFineDust>,
       locationFineDustList: null == locationFineDustList
           ? _value.locationFineDustList
           : locationFineDustList // ignore: cast_nullable_to_non_nullable
@@ -831,6 +838,7 @@ abstract class _$$LocationFineDustStateImplCopyWith<$Res>
   @useResult
   $Res call(
       {LocationFineDustStatus status,
+      List<LocationFineDust> sortedList,
       List<LocationFineDust> locationFineDustList,
       List<int> bookmarkLocationList});
 }
@@ -848,6 +856,7 @@ class __$$LocationFineDustStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? status = null,
+    Object? sortedList = null,
     Object? locationFineDustList = null,
     Object? bookmarkLocationList = null,
   }) {
@@ -856,6 +865,10 @@ class __$$LocationFineDustStateImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as LocationFineDustStatus,
+      sortedList: null == sortedList
+          ? _value._sortedList
+          : sortedList // ignore: cast_nullable_to_non_nullable
+              as List<LocationFineDust>,
       locationFineDustList: null == locationFineDustList
           ? _value._locationFineDustList
           : locationFineDustList // ignore: cast_nullable_to_non_nullable
@@ -873,13 +886,24 @@ class __$$LocationFineDustStateImplCopyWithImpl<$Res>
 class _$LocationFineDustStateImpl implements _LocationFineDustState {
   _$LocationFineDustStateImpl(
       {required this.status,
+      final List<LocationFineDust> sortedList = const [],
       final List<LocationFineDust> locationFineDustList = const [],
       final List<int> bookmarkLocationList = const []})
-      : _locationFineDustList = locationFineDustList,
+      : _sortedList = sortedList,
+        _locationFineDustList = locationFineDustList,
         _bookmarkLocationList = bookmarkLocationList;
 
   @override
   final LocationFineDustStatus status;
+  final List<LocationFineDust> _sortedList;
+  @override
+  @JsonKey()
+  List<LocationFineDust> get sortedList {
+    if (_sortedList is EqualUnmodifiableListView) return _sortedList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_sortedList);
+  }
+
   final List<LocationFineDust> _locationFineDustList;
   @override
   @JsonKey()
@@ -902,7 +926,7 @@ class _$LocationFineDustStateImpl implements _LocationFineDustState {
 
   @override
   String toString() {
-    return 'LocationFineDustState(status: $status, locationFineDustList: $locationFineDustList, bookmarkLocationList: $bookmarkLocationList)';
+    return 'LocationFineDustState(status: $status, sortedList: $sortedList, locationFineDustList: $locationFineDustList, bookmarkLocationList: $bookmarkLocationList)';
   }
 
   @override
@@ -911,6 +935,8 @@ class _$LocationFineDustStateImpl implements _LocationFineDustState {
         (other.runtimeType == runtimeType &&
             other is _$LocationFineDustStateImpl &&
             (identical(other.status, status) || other.status == status) &&
+            const DeepCollectionEquality()
+                .equals(other._sortedList, _sortedList) &&
             const DeepCollectionEquality()
                 .equals(other._locationFineDustList, _locationFineDustList) &&
             const DeepCollectionEquality()
@@ -921,6 +947,7 @@ class _$LocationFineDustStateImpl implements _LocationFineDustState {
   int get hashCode => Object.hash(
       runtimeType,
       status,
+      const DeepCollectionEquality().hash(_sortedList),
       const DeepCollectionEquality().hash(_locationFineDustList),
       const DeepCollectionEquality().hash(_bookmarkLocationList));
 
@@ -935,11 +962,14 @@ class _$LocationFineDustStateImpl implements _LocationFineDustState {
 abstract class _LocationFineDustState implements LocationFineDustState {
   factory _LocationFineDustState(
       {required final LocationFineDustStatus status,
+      final List<LocationFineDust> sortedList,
       final List<LocationFineDust> locationFineDustList,
       final List<int> bookmarkLocationList}) = _$LocationFineDustStateImpl;
 
   @override
   LocationFineDustStatus get status;
+  @override
+  List<LocationFineDust> get sortedList;
   @override
   List<LocationFineDust> get locationFineDustList;
   @override

@@ -74,7 +74,10 @@ class LocationFineDustBloc
     final bookmarkLocationList = state.bookmarkLocationList;
 
     if (list.isEmpty || bookmarkLocationList.isEmpty) {
-      emit(state.copyWith(status: LocationFineDustStatus.success));
+      emit(state.copyWith(
+        status: LocationFineDustStatus.success,
+        sortedList: list,
+      ));
       return;
     }
 
@@ -92,7 +95,7 @@ class LocationFineDustBloc
 
     emit(state.copyWith(
       status: LocationFineDustStatus.success,
-      locationFineDustList: sortedList,
+      sortedList: sortedList,
     ));
   }
 
