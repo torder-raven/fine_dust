@@ -22,7 +22,7 @@ class LocationFineDustCard extends StatelessWidget {
         color: ColorResource.ITEM_BACKGROUND_COLOR,
         borderRadius: BorderRadius.circular(16.0),
       ),
-      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -65,7 +65,7 @@ class _LeftInfo extends StatelessWidget {
               location,
               style: Theme.of(context)
                   .textTheme
-                  .headlineMedium
+                  .headlineLarge
                   ?.copyWith(color: Colors.white, fontWeight: FontWeight.w800),
             ),
             if (isBookmark)
