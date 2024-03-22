@@ -41,7 +41,7 @@ class BookmarkFirestore {
   Stream<List<int>> getBookmarkList() async* {
     yield* _firestore
         .collection(_collectionId)
-        .orderBy(LocationCodeKey, descending: true)
+        .orderBy(bookmarkDateKey, descending: false)
         .snapshots()
         .map(
           (event) => event.docs.toLocalCodeList(),
