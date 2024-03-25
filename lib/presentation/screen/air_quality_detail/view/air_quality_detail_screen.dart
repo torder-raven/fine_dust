@@ -103,9 +103,9 @@ class _AirQualityDetailScreenState extends State<AirQualityDetailScreen> {
                         color: Colors.white,
                       ),
                       flexibleSpace: FlexibleSpaceBar(
+                        centerTitle: true,
                         expandedTitleScale: 2,
                         title: Container(
-                          // height: state is AirQualityDetailSuccess ? size.height * 0.25 : kToolbarHeight,
                           color: Theme.of(context).primaryColor,
                           child: Text(
                             widget.locationCode.locationName,
