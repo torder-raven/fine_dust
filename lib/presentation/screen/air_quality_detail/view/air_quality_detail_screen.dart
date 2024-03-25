@@ -9,9 +9,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../../../domain/entity/dust_info.dart';
 import '../../../../domain/repository/fine_dust_repository.dart';
+import '../../component/loading.dart';
+import '../../component/lottie_animation.dart';
 import '../bloc/air_quality_detail_bloc.dart';
 import 'air_quality_in_daily_view.dart';
 import 'air_quality_view.dart';
@@ -100,7 +103,6 @@ class _AirQualityDetailScreenState extends State<AirQualityDetailScreen> {
                         color: Colors.white,
                       ),
                       flexibleSpace: FlexibleSpaceBar(
-                        // background: , // TODO 이미지 넣으면 딱인데..
                         expandedTitleScale: 2,
                         title: Container(
                           // height: state is AirQualityDetailSuccess ? size.height * 0.25 : kToolbarHeight,
@@ -112,7 +114,7 @@ class _AirQualityDetailScreenState extends State<AirQualityDetailScreen> {
                                 .titleLarge
                                 ?.copyWith(
                                   color: Colors.white,
-                                  fontWeight: FontWeight.w800,
+                                  fontWeight: FontWeight.w600,
                                 ),
                           ),
                         ),
@@ -120,9 +122,11 @@ class _AirQualityDetailScreenState extends State<AirQualityDetailScreen> {
                       ),
                     ),
                     switch (state) {
-                      AirQualityDetailInitial() => renderInitial(height: size.height * 0.75),
+                      AirQualityDetailInitial() =>
+                        renderInitial(height: size.height * 0.75),
                       AirQualityDetailSuccess() => renderSuccess(state),
-                      AirQualityDetailFailure() => renderFailure(height: size.height * 0.75),
+                      AirQualityDetailFailure() =>
+                        renderFailure(height: size.height * 0.75),
                     }
                   ],
                 ),
@@ -138,11 +142,7 @@ class _AirQualityDetailScreenState extends State<AirQualityDetailScreen> {
     return SliverToBoxAdapter(
       child: Container(
         height: height,
-        child: Center(
-          child: CircularProgressIndicator(
-            color: Colors.white,
-          ),
-        ),
+        child: Center(child: Loading()),
       ),
     );
   }
@@ -165,37 +165,43 @@ class _AirQualityDetailScreenState extends State<AirQualityDetailScreen> {
   }
 
   Widget renderSuccess(AirQualityDetailSuccess state) {
-    return SliverList(
-      delegate: SliverChildListDelegate(
-        [
-          AirQualityView(
-            airQualityType: AirQualityType.FINE_DUST,
-            airQualityInfo: state.locationTotalInfo.fineDustList.first,
-            onTap: () => showAirQualityBottomSheet(
-              locationCode: state.locationTotalInfo.locationCode,
+    return SliverPadding(
+      padding: EdgeInsets.all(16.0),
+      sliver: SliverList(
+        delegate: SliverChildListDelegate(
+          [
+            WalkingMenAnimation(),
+            AirQualityView(
               airQualityType: AirQualityType.FINE_DUST,
-              airQualityInfoList: state.locationTotalInfo.fineDustList,
+              airQualityInfo: state.locationTotalInfo.fineDustList.first,
+              onTap: () => showAirQualityBottomSheet(
+                locationCode: state.locationTotalInfo.locationCode,
+                airQualityType: AirQualityType.FINE_DUST,
+                airQualityInfoList: state.locationTotalInfo.fineDustList,
+              ),
             ),
-          ),
-          AirQualityView(
-            airQualityType: AirQualityType.ULTRA_FINE_DUST,
-            airQualityInfo: state.locationTotalInfo.ultraFineDustList.first,
-            onTap: () => showAirQualityBottomSheet(
-              locationCode: state.locationTotalInfo.locationCode,
+            SizedBox(height: 16.0),
+            AirQualityView(
               airQualityType: AirQualityType.ULTRA_FINE_DUST,
-              airQualityInfoList: state.locationTotalInfo.ultraFineDustList,
+              airQualityInfo: state.locationTotalInfo.ultraFineDustList.first,
+              onTap: () => showAirQualityBottomSheet(
+                locationCode: state.locationTotalInfo.locationCode,
+                airQualityType: AirQualityType.ULTRA_FINE_DUST,
+                airQualityInfoList: state.locationTotalInfo.ultraFineDustList,
+              ),
             ),
-          ),
-          AirQualityView(
-            airQualityType: AirQualityType.OZONE,
-            airQualityInfo: state.locationTotalInfo.ozoneList.first,
-            onTap: () => showAirQualityBottomSheet(
-              locationCode: state.locationTotalInfo.locationCode,
+            SizedBox(height: 16.0),
+            AirQualityView(
               airQualityType: AirQualityType.OZONE,
-              airQualityInfoList: state.locationTotalInfo.ozoneList,
+              airQualityInfo: state.locationTotalInfo.ozoneList.first,
+              onTap: () => showAirQualityBottomSheet(
+                locationCode: state.locationTotalInfo.locationCode,
+                airQualityType: AirQualityType.OZONE,
+                airQualityInfoList: state.locationTotalInfo.ozoneList,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -224,39 +230,46 @@ class _AirQualityDetailScreenState extends State<AirQualityDetailScreen> {
         height: MediaQuery.of(context).size.height / 1.25,
         child: CustomScrollView(
           slivers: [
-            SliverAppBar(
-              leading: BackButton(
-                color: Colors.white,
-              ),
-              backgroundColor: Colors.blue[800]?.withOpacity(0.85),
-              pinned: true,
-              title: Text(
-                "${locationCode.locationName}의 ${airQualityType.displayName} 현황",
-                style: TextStyle(
+            SliverPadding(
+              padding: EdgeInsets.all(16.0),
+              sliver: SliverAppBar(
+                leading: BackButton(
                   color: Colors.white,
-                  fontWeight: FontWeight.bold,
                 ),
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(
-                  24.0,
+                backgroundColor: Colors.blue[800]?.withOpacity(0.85),
+                pinned: true,
+                title: Text(
+                  "${locationCode.locationName}의 ${airQualityType.displayName} 현황",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(
+                    24.0,
+                  ),
                 ),
               ),
             ),
-            SliverList(
-              delegate: SliverChildListDelegate(
-                [
-                  AirQualityView(
-                    airQualityType: airQualityType,
-                    airQualityInfo: airQualityInfoList.first,
-                  ),
-                  AirQualityInDailyView(
-                    title:
-                        "최근 ${airQualityInfoList.length}시간 내 ${airQualityType.displayName} 지수", // TODO 리소스화
-                    airQualityType: airQualityType,
-                    airQualityList: airQualityInfoList,
-                  )
-                ],
+            SliverPadding(
+              padding: EdgeInsets.all(16.0),
+              sliver: SliverList(
+                delegate: SliverChildListDelegate(
+                  [
+                    AirQualityView(
+                      airQualityType: airQualityType,
+                      airQualityInfo: airQualityInfoList.first,
+                    ),
+                    SizedBox(height: 16.0),
+                    AirQualityInDailyView(
+                      title:
+                          "최근 ${airQualityInfoList.length}시간 내 ${airQualityType.displayName} 지수", // TODO 리소스화
+                      airQualityType: airQualityType,
+                      airQualityList: airQualityInfoList,
+                    )
+                  ],
+                ),
               ),
             ),
           ],
