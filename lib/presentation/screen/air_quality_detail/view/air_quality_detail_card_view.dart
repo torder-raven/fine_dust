@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../constant/colors.dart';
+
 class AirQualityDetailCardView extends StatelessWidget {
   final String title;
   final Widget child;
@@ -14,15 +16,17 @@ class AirQualityDetailCardView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Colors.white.withOpacity(0),
-      margin: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
+    return Container(
+      decoration: BoxDecoration(
+        color: ColorResource.ITEM_BACKGROUND_COLOR,
+        borderRadius: BorderRadius.circular(16.0),
+      ),
       child: InkWell(
         borderRadius: BorderRadius.circular(12.0),
         splashColor: Colors.white.withOpacity(.25),
         onTap: onTap,
         child: Padding(
-          padding: const EdgeInsets.all(12.0),
+          padding: const EdgeInsets.all(20.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -32,12 +36,15 @@ class AirQualityDetailCardView extends StatelessWidget {
                   Text(
                     title,
                     style: TextStyle(
-                      color: Colors.white.withOpacity(0.5),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12.0,
+                      color: Colors.white.withOpacity(0.9),
+                      fontWeight: FontWeight.w600,
+                      fontSize: 20.0,
                     ),
                   ),
                 ],
+              ),
+              const SizedBox(
+                height: 10.0,
               ),
               child
             ],
