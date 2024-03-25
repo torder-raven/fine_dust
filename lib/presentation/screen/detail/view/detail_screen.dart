@@ -6,6 +6,7 @@ import 'package:fine_dust/domain/usecase/bookmark/bookmark_location_uscase.dart'
 import 'package:fine_dust/domain/usecase/bookmark/delete_bookmark_usecase.dart';
 import 'package:fine_dust/domain/usecase/bookmark/get_is_bookmarked_location_usecase.dart';
 import 'package:fine_dust/domain/usecase/dustInfo/get_local_air_info_usecase.dart';
+import 'package:fine_dust/presentation/screen/component/detail_loading.dart';
 import 'package:fine_dust/presentation/screen/detail/view/air_quality_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -140,11 +141,7 @@ class DetailScreen extends StatelessWidget {
                 ),
               );
             } else {
-              return Scaffold(
-                body: Center(
-                  child: CircularProgressIndicator(),
-                ),
-              );
+              return const DetailLoading();
             }
           },
         ),
