@@ -29,7 +29,7 @@ class AirQualityInHourView extends StatelessWidget {
               "${airQuality.dateTime.hour}:00",
               style: TextStyle(
                 color: Colors.white,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w300,
               ),
               textAlign: TextAlign.center,
             ),
@@ -37,7 +37,7 @@ class AirQualityInHourView extends StatelessWidget {
           Expanded(
             flex: 6,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 12.0),
               child: AirQualityLevelBar(
                 levelMaxValue: airQualityType.level.last,
                 rawValue: airQuality.rawValue,
@@ -50,7 +50,7 @@ class AirQualityInHourView extends StatelessWidget {
               airQuality.status,
               style: TextStyle(
                 color: Colors.white,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w300,
               ),
               textAlign: TextAlign.center,
             ),

@@ -23,18 +23,15 @@ class AirQualityView extends StatelessWidget {
       title: airQualityType.displayName,
       onTap: onTap,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 "${airQualityInfo.status}(${airQualityInfo.rawValue})", // TODO 리소스화
                 style: TextStyle(
                   color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18.0,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 16.0,
                 ),
               ),
             ],
