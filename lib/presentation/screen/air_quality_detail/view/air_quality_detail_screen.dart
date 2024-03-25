@@ -5,6 +5,7 @@ import 'package:fine_dust/domain/usecase/bookmark/bookmark_location_uscase.dart'
 import 'package:fine_dust/domain/usecase/bookmark/delete_bookmark_usecase.dart';
 import 'package:fine_dust/domain/usecase/bookmark/get_is_bookmarked_location_usecase.dart';
 import 'package:fine_dust/domain/usecase/dustInfo/get_local_air_info_usecase.dart';
+import 'package:fine_dust/presentation/constant/default_values.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -103,9 +104,9 @@ class _AirQualityDetailScreenState extends State<AirQualityDetailScreen> {
                         color: Colors.white,
                       ),
                       flexibleSpace: FlexibleSpaceBar(
+                        centerTitle: true,
                         expandedTitleScale: 2,
                         title: Container(
-                          // height: state is AirQualityDetailSuccess ? size.height * 0.25 : kToolbarHeight,
                           color: Theme.of(context).primaryColor,
                           child: Text(
                             widget.locationCode.locationName,
@@ -216,7 +217,9 @@ class _AirQualityDetailScreenState extends State<AirQualityDetailScreen> {
       isScrollControlled: true,
       builder: (_) => Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(24.0),
+          borderRadius: BorderRadius.only(
+              topLeft: DefaultValues.DEFAULT_RADIUS,
+              topRight: DefaultValues.DEFAULT_RADIUS),
           gradient: LinearGradient(
             begin: Alignment.center,
             end: Alignment.bottomCenter,

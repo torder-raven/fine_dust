@@ -69,10 +69,8 @@ class _LocationFineDustListScreenState
                     ),
                     child: Stack(
                       children: [
-                        Expanded(
-                          child: LocationFineDustList(
-                            state: state,
-                          ),
+                        LocationFineDustList(
+                          state: state,
                         ),
                         if (state.status == LocationFineDustStatus.loading)
                           const Loading(),

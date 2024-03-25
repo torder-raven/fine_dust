@@ -18,9 +18,6 @@ class BookmarkFirestore {
   }
 
   init() async {
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
     _collectionId = await FirebaseInstallations.instance.getId();
     _firestore = FirebaseFirestore.instance;
   }
