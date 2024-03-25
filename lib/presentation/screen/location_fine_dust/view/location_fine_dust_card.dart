@@ -143,7 +143,7 @@ class _RightInfo extends StatelessWidget {
             title,
             style: Theme.of(context).textTheme.labelLarge?.copyWith(
                   color: Colors.white,
-                  fontWeight: FontWeight.w800,
+                  fontWeight: FontWeight.w600,
                 ),
             textAlign: TextAlign.end,
           ),

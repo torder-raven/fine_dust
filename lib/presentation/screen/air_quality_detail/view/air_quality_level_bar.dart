@@ -17,11 +17,11 @@ class AirQualityLevelBar extends StatefulWidget {
 class _AirQualityLevelBarState extends State<AirQualityLevelBar> {
   final GlobalKey _globalKey = GlobalKey();
   final List<Color> airQualityLevels = [
-    Colors.blue[700]!,
-    Colors.green,
-    Colors.orange,
-    Colors.red,
-    Colors.red[900]!
+    Colors.blue[400]!,
+    Colors.green[400]!,
+    Colors.orange[400]!,
+    Colors.red[300]!,
+    Colors.red[500]!
   ];
   double currentLevelPosition = 0;
 
@@ -32,7 +32,9 @@ class _AirQualityLevelBarState extends State<AirQualityLevelBar> {
       double width = _globalKey.currentContext?.size?.width ?? 0.0;
       setState(() {
         currentLevelPosition = ((width / widget.levelMaxValue) *
-            (widget.rawValue > widget.levelMaxValue ? widget.levelMaxValue : widget.rawValue)
+            (widget.rawValue > widget.levelMaxValue
+                    ? widget.levelMaxValue
+                    : widget.rawValue)
                 .toDouble());
       });
     });
@@ -40,7 +42,7 @@ class _AirQualityLevelBarState extends State<AirQualityLevelBar> {
 
   @override
   Widget build(BuildContext context) {
-    const levelBarHeight = 14.0;
+    const levelBarHeight = 5.0;
     const currentLevelViewWidth = levelBarHeight - 2;
 
     return Stack(
@@ -51,7 +53,7 @@ class _AirQualityLevelBarState extends State<AirQualityLevelBar> {
           height: levelBarHeight,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(6.0),
-            border: Border.all(color: Colors.black, width: 2.0),
+            border: Border.all(color: Colors.white, width: .3),
             gradient: LinearGradient(
               begin: AlignmentDirectional.centerStart,
               end: AlignmentDirectional.centerEnd,
@@ -59,17 +61,20 @@ class _AirQualityLevelBarState extends State<AirQualityLevelBar> {
             ),
           ),
         ),
-        Positioned(
+        AnimatedPositioned(
+          curve: Curves.ease,
           left: (currentLevelPosition > 0
               ? currentLevelPosition - currentLevelViewWidth
               : 0),
           top: 0,
           bottom: 0,
+          duration: Duration(milliseconds: 750),
           child: Container(
             width: currentLevelViewWidth,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(3.0),
-              border: Border.all(color: Colors.white, width: 2.0),
+              color: Colors.white,
+              border: Border.all(color: Colors.white, width: 1.0),
             ),
           ),
         ),

@@ -6,7 +6,7 @@ import 'package:fine_dust/domain/entity/location_code.dart';
 import 'package:fine_dust/domain/entity/location_fine_dust.dart';
 import 'package:fine_dust/domain/entity/location_total_info.dart';
 
-import '../../../domain/entity/air_quailty_type.dart';
+import '../../../domain/entity/air_quality_type.dart';
 import '../../../domain/repository/fine_dust_repository.dart';
 
 class FineDustRepositoryImpl implements FineDustRepository {
@@ -17,23 +17,27 @@ class FineDustRepositoryImpl implements FineDustRepository {
   }) : _api = api;
 
   Future<List<RealTimeAvgListDistinctByCityResponse>>
-      getFineDustInfoListInRealTimeAvgListByCity() async =>
-          await _api.getRealTimeAvgListByCity(
+      getFineDustInfoListInRealTimeAvgListByCity() =>
+          _api.getRealTimeAvgListByCity(
             RealTimeAvgListDistinctByCityRequest(
-                itemCode: AirQualityType.FINE_DUST),
+              itemCode: AirQualityType.FINE_DUST,
+            ),
           );
 
   Future<List<RealTimeAvgListDistinctByCityResponse>>
-      getUltraInfoListInRealTimeAvgListByCity() async =>
-          await _api.getRealTimeAvgListByCity(
-              RealTimeAvgListDistinctByCityRequest(
-                  itemCode: AirQualityType.ULTRA_FINE_DUST));
+      getUltraInfoListInRealTimeAvgListByCity() =>
+          _api.getRealTimeAvgListByCity(
+            RealTimeAvgListDistinctByCityRequest(
+              itemCode: AirQualityType.ULTRA_FINE_DUST,
+            ),
+          );
 
   Future<List<RealTimeAvgListDistinctByCityResponse>>
-      getOzoneInfoListInRealTimeAvgListByCity() async =>
-          await _api.getRealTimeAvgListByCity(
+      getOzoneInfoListInRealTimeAvgListByCity() =>
+          _api.getRealTimeAvgListByCity(
             RealTimeAvgListDistinctByCityRequest(
-                itemCode: AirQualityType.OZONE),
+              itemCode: AirQualityType.OZONE,
+            ),
           );
 
   @override
@@ -73,12 +77,15 @@ class FineDustRepositoryImpl implements FineDustRepository {
 
     return LocationTotalInfo(
       locationCode: _locationCode,
-      fineDustList:
-          fineDustInfoList.map((response) => response.toFindDustInfo(_locationCode)).toList(),
-      ultraFineDustList:
-          ultraInfoList.map((response) => response.toUltraDustInfo(_locationCode)).toList(),
-      ozoneList:
-          ozoneInfoList.map((response) => response.toOzoneInfo(_locationCode)).toList(),
+      fineDustList: fineDustInfoList
+          .map((response) => response.toFindDustInfo(_locationCode))
+          .toList(),
+      ultraFineDustList: ultraInfoList
+          .map((response) => response.toUltraDustInfo(_locationCode))
+          .toList(),
+      ozoneList: ozoneInfoList
+          .map((response) => response.toOzoneInfo(_locationCode))
+          .toList(),
     );
   }
 }

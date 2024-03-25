@@ -1,8 +1,9 @@
 import 'package:fine_dust/domain/entity/dust_info.dart';
-import 'package:fine_dust/domain/entity/air_quailty_type.dart';
-import 'package:fine_dust/presentation/screen/detail/view/air_quality_level_bar.dart';
-import 'package:fine_dust/presentation/screen/detail/view/detail_card_view.dart';
+import 'package:fine_dust/domain/entity/air_quality_type.dart';
 import 'package:flutter/material.dart';
+
+import 'air_quality_detail_card_view.dart';
+import 'air_quality_level_bar.dart';
 
 class AirQualityView extends StatelessWidget {
   final AirQualityType airQualityType;
@@ -18,21 +19,19 @@ class AirQualityView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DetailCardView(
+    return AirQualityDetailCardView(
       title: airQualityType.displayName,
+      onTap: onTap,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 "${airQualityInfo.status}(${airQualityInfo.rawValue})", // TODO 리소스화
                 style: TextStyle(
                   color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18.0,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 16.0,
                 ),
               ),
             ],
@@ -44,7 +43,6 @@ class AirQualityView extends StatelessWidget {
           )
         ],
       ),
-      onTap: onTap,
     );
   }
 }

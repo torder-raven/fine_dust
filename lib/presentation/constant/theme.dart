@@ -5,6 +5,7 @@ import 'colors.dart';
 final findDustTheme = ThemeData(
   primaryColor: ColorResource.PRIMARY_COLOR,
   appBarTheme: const AppBarTheme(
+    centerTitle: true,
     color: ColorResource.PRIMARY_COLOR,
     iconTheme: IconThemeData(color: Colors.white),
     titleTextStyle: TextStyle(
