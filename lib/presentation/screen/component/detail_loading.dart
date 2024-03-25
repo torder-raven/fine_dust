@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../constant/colors.dart';
-import 'loading.dart';
 
 class DetailLoading extends StatelessWidget {
   const DetailLoading({super.key});
@@ -24,7 +23,9 @@ class DetailLoading extends StatelessWidget {
           ),
         ),
         child: const Center(
-          child: Loading(),
+          child: CircularProgressIndicator(
+            color: ColorResource.PRIMARY_COLOR,
+          ),
         ),
       ),
     );
