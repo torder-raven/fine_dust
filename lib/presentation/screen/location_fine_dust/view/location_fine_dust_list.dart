@@ -67,7 +67,7 @@ class LocationFineDustList extends StatelessWidget {
       context,
       MaterialPageRoute(
         builder: (context) {
-          return DetailScreen(locationCode: locationCode);
+          return AirQualityDetailScreen(locationCode: locationCode);
         },
       ),
     );

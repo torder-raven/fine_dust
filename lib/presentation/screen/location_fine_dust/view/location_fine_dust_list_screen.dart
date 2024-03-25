@@ -8,10 +8,10 @@ import 'package:fine_dust/domain/usecase/bookmark/get_bookmark_list_usecase.dart
 import 'package:fine_dust/domain/usecase/dustInfo/get_local_fine_dust_info_list_usecase.dart';
 import 'package:fine_dust/presentation/constant/colors.dart';
 import 'package:fine_dust/presentation/constant/strings.dart';
+import 'package:fine_dust/presentation/screen/air_quality_detail/view/air_quality_detail_screen.dart';
 import 'package:fine_dust/presentation/screen/component/loading.dart';
 import 'package:fine_dust/presentation/screen/component/lottie_animation.dart';
 import 'package:fine_dust/presentation/screen/component/slidable_item_list/slidable_item_list.dart';
-import 'package:fine_dust/presentation/screen/detail/view/detail_screen.dart';
 import 'package:fine_dust/presentation/screen/location_fine_dust/view/location_fine_dust_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
