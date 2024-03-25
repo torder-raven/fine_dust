@@ -9,10 +9,13 @@ import 'package:fine_dust/domain/usecase/dustInfo/get_local_fine_dust_info_list_
 import 'package:fine_dust/presentation/constant/colors.dart';
 import 'package:fine_dust/presentation/constant/strings.dart';
 import 'package:fine_dust/presentation/screen/component/loading.dart';
+import 'package:fine_dust/presentation/screen/component/lottie_animation.dart';
 import 'package:fine_dust/presentation/screen/component/slidable_item_list/slidable_item_list.dart';
 import 'package:fine_dust/presentation/screen/detail/view/detail_screen.dart';
 import 'package:fine_dust/presentation/screen/location_fine_dust/view/location_fine_dust_card.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/location_fine_dust_bloc.dart';
@@ -66,8 +69,10 @@ class _LocationFineDustListScreenState
                     ),
                     child: Stack(
                       children: [
-                        LocationFineDustList(
-                          state: state,
+                        Expanded(
+                          child: LocationFineDustList(
+                            state: state,
+                          ),
                         ),
                         if (state.status == LocationFineDustStatus.loading)
                           const Loading(),
